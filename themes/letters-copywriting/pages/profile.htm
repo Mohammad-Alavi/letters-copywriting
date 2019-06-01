@@ -1,0 +1,42 @@
+title = "Profile"
+url = "/profile"
+layout = "default"
+description = "User login and profile page"
+is_hidden = 0
+
+[sociallogin]
+
+[Clake\UserExtended\Components\Account account]
+paramCode = "code"
+==
+{% if not user %}
+<div class="row sign-in">
+    <div class="login col-sm-5 col-lg-3 offset-lg-2">
+        <!--    login field-->
+        {% partial 'account::login' %}
+    </div>
+    <p class="or col-sm-2 text-center">or</p>
+    <div class="social-login col-sm-5 col-lg-3">
+        <!--    social sign in-->
+        {% for name, link in social_login_links %}
+        <a class="btn btn-danger btn-social btn-google" href="{{ link }}"><span class="fab fa-google"></span> Sign
+            in with {{ name }}</a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-center register">
+        <p>
+            Don't have an account yet?
+        </p>
+        <div><a href="register" class="btn btn-info">Join Now</a></div>
+    </div>
+</div>
+
+{% else %}
+
+{% partial 'account::update' %} - User Settings
+{% partial 'account::logout' %} - User Logout
+
+{% endif %}

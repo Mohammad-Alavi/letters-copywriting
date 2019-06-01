@@ -1,0 +1,39 @@
+.sign-in, .social-login, .or {
+  margin-top: 75px;
+}
+
+.or {
+  font-size: 1.5rem;
+}
+
+.register {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@include  media-breakpoint-down(xs) {
+  .or, .social-login {
+    margin: 0px auto;
+  }
+  .social-login {
+    text-align: center;
+  }
+
+  .register {
+    margin-top: 35px;
+  }
+}
+
+@media (max-height: 630px) {
+  .sign-in {
+    margin-top: 10px;
+  }
+
+.or, .social-login {
+  margin-top: 0px;
+
+}
+  .register {
+    margin-top: 35px;
+  }
+}

@@ -1,0 +1,15 @@
+title = "Home"
+url = "/"
+layout = "default"
+is_hidden = 0
+==
+<div class="jumbotron">
+    <div class="container">
+        {% content "welcome.htm" %}
+        <h2>We know that you are{% if not user %} <strong>not</strong>{% endif %} logged in now.</h2>
+    </div>
+</div>
+
+<div class="container">
+
+</div>

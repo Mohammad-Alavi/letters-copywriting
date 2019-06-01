@@ -1,0 +1,14 @@
+title = "register"
+url = "/register"
+layout = "default"
+is_hidden = 0
+
+[Clake\UserExtended\Components\Account account]
+paramCode = "code"
+==
+<!--not registered?-->
+<div class="row">
+    <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-2">
+        {% partial 'account::signup' %}
+    </div>
+</div>

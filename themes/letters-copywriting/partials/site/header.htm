@@ -1,0 +1,28 @@
+[session]
+security = "all"
+==
+<!-- Nav -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
+                    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+            <a class="navbar-brand" href="{{ 'home'|page }}">Letters Copywriting</a>
+
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav ml-0 mt-2 mt-lg-0">
+                <li class="nav-item {% if this.page.id == 'home' %}active{% endif %}">
+                    <a class="nav-link" href="{{ 'home'|page }}">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item {% if this.page.id == 'profile' %}active{% endif %}">
+                    <a class="nav-link" href="{{ 'profile'|page }}">{% if user %}Profile{% else %}Login | Register{%
+                        endif
+                        %}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
