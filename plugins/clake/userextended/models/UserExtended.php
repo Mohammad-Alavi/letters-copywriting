@@ -26,7 +26,7 @@ class UserExtended extends User
      * @var array
      */
     protected $timezonable = [
-        'created_at',
+//        'created_at', temporary fix for when use register
         'updated_at'
     ];
 
