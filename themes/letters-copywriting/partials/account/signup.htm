@@ -7,7 +7,7 @@
         data-request-validate
         data-request-flash
         data-request="onRegister"
-		id ="signupForm">
+        id="signupForm">
     <div class="form-group form-group-first-name">
         <label for="registerFirstName">{{ "clake.userextended::lang.components.account.firstname"|trans }}</label>
         <input
@@ -15,8 +15,8 @@
                 type="text"
                 class="form-control"
                 id="registerFirstName"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.enterfname"|trans }}' />
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.enterfname"|trans }}'/>
     </div>
     <span data-validate-for="first_name"></span>
 
@@ -27,8 +27,8 @@
                 type="text"
                 class="form-control"
                 id="registerLastName"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.enterlname"|trans }}' />
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.enterlname"|trans }}'/>
     </div>
     <span data-validate-for="last_name"></span>
 
@@ -39,8 +39,8 @@
                 type='{% if account.signUp == "email" %}email{% else %}text{% endif %}'
                 class="form-control"
                 id="register{{account.signUp}}"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.enteremail"|trans }}' />
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.enteremail"|trans }}'/>
     </div>
     <span data-validate-for="{{account.signUp}}"></span>
 
@@ -53,8 +53,8 @@
                 type="email"
                 class="form-control"
                 id="registerEmail"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.enteremail"|trans }}' />
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.enteremail"|trans }}'/>
 
     </div>
     <span data-validate-for="email"></span>
@@ -68,20 +68,21 @@
                 type="password"
                 class="form-control"
                 id="registerPassword"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.enterpassword"|trans }}' />
-	</div>
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.enterpassword"|trans }}'/>
+    </div>
     <span data-validate-for="password"></span>
 
     <div class="form-group form-group-password-confirmation">
-        <label for="registerConfirmPassword">{{ "clake.userextended::lang.components.account.confirmpassword"|trans }}</label>
+        <label for="registerConfirmPassword">{{ "clake.userextended::lang.components.account.confirmpassword"|trans
+            }}</label>
         <input
                 name="password_confirmation"
                 type="password"
                 class="form-control"
                 id="registerConfirmPassword"
-				required="{{attributes.options.validation}}"
-                placeholder='{{ "clake.userextended::lang.components.account.confirmpassword"|trans }}' />
+                required="{{attributes.options.validation}}"
+                placeholder='{{ "clake.userextended::lang.components.account.confirmpassword"|trans }}'/>
     </div>
     <span data-validate-for="password_confirmation"></span>
 
@@ -91,8 +92,10 @@
 
     {% endfor %}
 
-    <button data-attach-loading type="submit" class="btn btn-primary" id="submitButton">{{ "clake.userextended::lang.components.account.register"|trans }}</button>
-    <div class="alert alert-danger" data-validate-error>
+    <button data-attach-loading type="submit" class="btn btn-primary" id="submitButton">{{
+        "clake.userextended::lang.components.account.register"|trans }}
+    </button>
+    <div class="alert alert-danger register-update-error" data-validate-error>
         <p data-message></p>
     </div>
 </form>

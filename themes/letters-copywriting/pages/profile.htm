@@ -7,11 +7,19 @@ is_hidden = 0
 [sociallogin]
 
 [Clake\UserExtended\Components\Account account]
+redirect = "profile"
 paramCode = "code"
+
+[ueuser]
+type = "random"
+maxItems = 5
+paramCode = "user"
+profilePage = "user/profile"
+template = "social"
 ==
 {% if not user %}
 <div class="row sign-in">
-    <div class="login col-sm-5 col-lg-3 offset-lg-2">
+    <div class="col-sm-5 col-lg-3 offset-lg-2">
         <!--    login field-->
         {% partial 'account::login' %}
     </div>
@@ -35,8 +43,18 @@ paramCode = "code"
 </div>
 
 {% else %}
-
-{% partial 'account::update' %} - User Settings
-{% partial 'account::logout' %} - User Logout
-
+<div class="row">
+    <div class="col-12">
+        {% partial 'account::update' %}
+    </div>
+    <div class="col-12">
+        <hr>
+        <h3>Here we will add special functionalities based on user group, e.g writer, customer, admin etc...</h3>
+        {% for group in ueuser.groups() %}
+            <h5>Current logged in user, group details:</h5>
+            <span><strong>Role: </strong></span>{{group.name}}<br>
+            <span><strong>Role description: </strong></span>{{group.description}}
+        {% endfor %}
+    </div>
+</div>
 {% endif %}

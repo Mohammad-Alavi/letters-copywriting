@@ -4,10 +4,11 @@ layout = "default"
 is_hidden = 0
 
 [Clake\UserExtended\Components\Account account]
+redirect = "profile"
 paramCode = "code"
 ==
 <!--not registered?-->
-<div class="row">
+<div class="row row-register-page">
     <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-2">
         {% partial 'account::signup' %}
     </div>

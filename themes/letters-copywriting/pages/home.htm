@@ -3,13 +3,11 @@ url = "/"
 layout = "default"
 is_hidden = 0
 ==
-<div class="jumbotron">
-    <div class="container">
-        {% content "welcome.htm" %}
-        <h2>We know that you are{% if not user %} <strong>not</strong>{% endif %} logged in now.</h2>
-    </div>
-</div>
-
 <div class="container">
-
+    <div class="row">
+        <div class="col-12 text-center">
+            {% content "welcome.htm" %}
+            <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>
+        </div>
+    </div>
 </div>
