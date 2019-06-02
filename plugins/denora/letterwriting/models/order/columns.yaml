@@ -1,0 +1,49 @@
+columns:
+    id:
+        label: id
+        type: number
+        searchable: true
+        sortable: true
+    customer_id:
+        label: customer_id
+        type: number
+        searchable: true
+        sortable: true
+    writer_id:
+        label: writer_id
+        type: number
+        searchable: true
+        sortable: true
+    description:
+        label: description
+        type: text
+        searchable: true
+    is_rush:
+        label: is_rush
+        type: text
+        sortable: true
+    language:
+        label: language
+        type: text
+        searchable: true
+        sortable: true
+    price:
+        label: price
+        type: text
+        searchable: true
+        sortable: true
+    created_at:
+        label: created_at
+        type: datetime
+        searchable: true
+        sortable: true
+    updated_at:
+        label: updated_at
+        type: datetime
+        searchable: true
+        sortable: true
+    deleted_at:
+        label: deleted_at
+        type: datetime
+        searchable: true
+        sortable: true
