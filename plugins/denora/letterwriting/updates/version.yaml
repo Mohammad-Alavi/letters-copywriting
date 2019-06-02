@@ -3,3 +3,6 @@
 1.0.2:
     - 'Created table denora_letterwriting_orders'
     - builder_table_create_denora_letterwriting_orders.php
+1.0.3:
+    - 'Created table denora_letterwriting_statuses'
+    - builder_table_create_denora_letterwriting_statuses.php
