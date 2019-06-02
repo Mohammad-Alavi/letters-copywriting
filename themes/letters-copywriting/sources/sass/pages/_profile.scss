@@ -11,6 +11,13 @@
   font-weight: bold;
 }
 
+.login-update-error {
+margin-top: 70px;
+  div {
+    font-size: 0.8rem;
+  }
+}
+
 @include  media-breakpoint-down(xs) {
   .or, .social-login {
     margin: 0px auto;
