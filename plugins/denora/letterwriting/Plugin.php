@@ -12,6 +12,7 @@ class Plugin extends PluginBase {
     public function registerComponents() {
         return [
             'Denora\Letterwriting\Components\OrderList'    => 'orderList',
+            'Denora\Letterwriting\Components\OrderDetails' => 'orderDetails',
         ];
     }
 
