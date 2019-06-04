@@ -13,6 +13,7 @@ class Plugin extends PluginBase {
         return [
             'Denora\Letterwriting\Components\OrderList'    => 'orderList',
             'Denora\Letterwriting\Components\OrderDetails' => 'orderDetails',
+            'Denora\Letterwriting\Components\OrderHistory' => 'orderHistory',
         ];
     }
 
