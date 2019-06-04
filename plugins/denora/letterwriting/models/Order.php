@@ -2,15 +2,13 @@
 
 use Model;
 
-/**
- * Model
- */
-class Order extends Model
-{
+class Order extends Model {
     use \October\Rain\Database\Traits\Validation;
-    
     use \October\Rain\Database\Traits\SoftDelete;
 
+    /**
+     * @var array
+     */
     protected $dates = ['deleted_at'];
 
 
@@ -23,5 +21,12 @@ class Order extends Model
      * @var array Validation rules
      */
     public $rules = [
+    ];
+
+    /**
+     * @var array
+     */
+    public $hasMany = [
+        'statuses' => 'Denora\Letterwriting\Models\Status'
     ];
 }
