@@ -3,6 +3,9 @@ url = "/"
 layout = "default"
 is_hidden = 0
 
+[newOrder]
+user_id = 0
+
 [orderHistory]
 role = "customer"
 order_id = 1
@@ -12,6 +15,9 @@ order_id = 1
         <div class="col-12 text-center">
             {% content "welcome.htm" %}
             <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>
+            <hr>
+            {% component 'newOrder' %}
+            <hr>
             {% component 'orderHistory' %}
         </div>
     </div>

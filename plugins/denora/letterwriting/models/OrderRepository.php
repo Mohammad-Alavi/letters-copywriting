@@ -28,16 +28,23 @@ class OrderRepository {
      * @param float  $price
      * @param bool   $isRush
      *
-     * @return Order|\Illuminate\Database\Eloquent\Model
+     * @return Order
      */
     function create(int $customerId, string $description, string $language, float $price, bool $isRush = false) {
-        return Order::create([
-            'customer_id' => $customerId,
-            'description' => $description,
-            'is_rush'     => $isRush,
-            'language'    => $language,
-            'price'       => $price
-        ]);
+
+        $order = new Order();
+        $order->customer_id = $customerId;
+        $order->description = $description;
+        $order->is_rush = $isRush;
+        $order->language = $language;
+        $order->price = $price;
+
+        $order->save();
+
+        $order->setNewStatus(Status::$CREATED);
+
+        return $order;
+
     }
 
 

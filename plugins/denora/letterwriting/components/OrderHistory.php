@@ -5,6 +5,7 @@ namespace Denora\Letterwriting\Components;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\OrderRepository;
 use Denora\Letterwriting\Models\Status;
+use Denora\Letterwriting\Models\StatusRepository;
 
 class OrderHistory extends ComponentBase {
 
@@ -22,6 +23,11 @@ class OrderHistory extends ComponentBase {
      * @var OrderRepository
      */
     private $orderRepository;
+
+    /**
+     * @var StatusRepository
+     */
+    private $statusRepository;
 
     /**
      * Returns information about this component, including name and description.
@@ -70,11 +76,12 @@ class OrderHistory extends ComponentBase {
 
     public function onRun() {
         $this->orderRepository = new OrderRepository();
+        $this->statusRepository = new StatusRepository();
 
         $this->userRole = $this->property('role');
         $orderId = $this->property('order_id');
 
-        $this->statusList = $this->orderRepository->find($orderId)->statuses;
+        $this->statusList = $this->statusRepository->all($orderId);
     }
 
 }
