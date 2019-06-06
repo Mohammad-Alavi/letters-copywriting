@@ -1,0 +1,35 @@
+<h1>NEW ORDER:</h1>
+
+<form data-request="onCreateOrder">
+
+    <label>
+        Description
+        <input type="text" name="description">
+    </label>
+
+    <label>
+        Rush
+        <input type="checkbox" name="is_rush">
+    </label>
+
+    <label>
+        language
+        <select name="language">
+            <option value="en">English</option>
+            <option value="fa">Farsi</option>
+            <option value="ar">Arabic</option>
+        </select>
+    </label>
+
+    <button type="submit">CREATE</button>
+
+    <ul>
+        {% for error in errors.all() %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% flash success %}
+    <strong>{{ message }}</strong>
+    {% endflash %}
+
+</form>
