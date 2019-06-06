@@ -5,13 +5,18 @@ use Model;
 /**
  * Model
  */
-class Status extends Model
-{
+class Status extends Model {
     use \October\Rain\Database\Traits\Validation;
-    
     use \October\Rain\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at'];
+
+    static $CREATED = 'created';
+    static $PAID = 'paid';
+    static $PICKED = 'picked';
+    static $DONE = 'done';
+    static $REJECTED = 'rejected';
+    static $DELIVERED = 'delivered';
 
 
     /**
