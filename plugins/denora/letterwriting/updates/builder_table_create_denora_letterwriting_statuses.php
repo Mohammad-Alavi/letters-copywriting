@@ -13,6 +13,7 @@ class BuilderTableCreateDenoraLetterwritingStatuses extends Migration
             $table->increments('id');
             $table->integer('order_id');
             $table->string('label');
+            $table->text('description');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
