@@ -29,4 +29,15 @@ class Order extends Model {
     public $hasMany = [
         'statuses' => 'Denora\Letterwriting\Models\Status'
     ];
+
+    /**
+     * @param string $label
+     * @param string $description
+     */
+    public function setNewStatus(string $label, string $description = '') {
+        $repository = new StatusRepository();
+
+        $repository->create($this->id, $label, $description);
+    }
+
 }
