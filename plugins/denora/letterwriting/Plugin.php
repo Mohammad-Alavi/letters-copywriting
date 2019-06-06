@@ -14,6 +14,7 @@ class Plugin extends PluginBase {
             'Denora\Letterwriting\Components\OrderList'    => 'orderList',
             'Denora\Letterwriting\Components\OrderDetails' => 'orderDetails',
             'Denora\Letterwriting\Components\OrderHistory' => 'orderHistory',
+            'Denora\Letterwriting\Components\NewOrder'     => 'newOrder',
         ];
     }
 
