@@ -65,7 +65,7 @@ class NewOrder extends ComponentBase {
 
         $description = Input::get('description');
         $language = Input::get('language');
-        $isRush = Input::get('is_rush');
+        $isRush = Input::get('is_rush', 0);
 
         $this->repository->create(
             123,
@@ -76,6 +76,7 @@ class NewOrder extends ComponentBase {
         );
 
         Flash::success('New order has been created successfully');
+        return Redirect::back();
     }
 
     private function getValidator() {
