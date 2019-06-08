@@ -31,10 +31,52 @@ class Order extends Model {
     ];
 
     /**
+     * @param string $description
+     */
+    public function setStatusCreated(string $description = ''){
+        $this->setNewStatus(Status::$CREATED, $description);
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setStatusPaid(string $description = ''){
+        $this->setNewStatus(Status::$PAID, $description);
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setStatusPicked(string $description = ''){
+        $this->setNewStatus(Status::$PICKED, $description);
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setStatusDone(string $description = ''){
+        $this->setNewStatus(Status::$DONE, $description);
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setStatusRejected(string $description = ''){
+        $this->setNewStatus(Status::$REJECTED, $description);
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setStatusDelivered(string $description = ''){
+        $this->setNewStatus(Status::$DELIVERED, $description);
+    }
+
+    /**
      * @param string $label
      * @param string $description
      */
-    public function setNewStatus(string $label, string $description = '') {
+    private function setNewStatus(string $label, string $description) {
         $repository = new StatusRepository();
 
         $repository->create($this->id, $label, $description);

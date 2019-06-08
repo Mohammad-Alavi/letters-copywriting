@@ -41,7 +41,7 @@ class OrderRepository {
 
         $order->save();
 
-        $order->setNewStatus(Status::$CREATED);
+        $order->setStatusCreated();
 
         return $order;
 
