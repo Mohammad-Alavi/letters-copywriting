@@ -20677,7 +20677,8 @@ fieldset[disabled] .btn-yahoo.focus {
 
 .sign-in,
 .social-login,
-.or {
+.or,
+.update-form {
   margin-top: 75px;
 }
 
