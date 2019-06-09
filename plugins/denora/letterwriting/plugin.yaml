@@ -1,0 +1,6 @@
+plugin:
+    name: 'denora.letterwriting::lang.plugin.name'
+    description: 'denora.letterwriting::lang.plugin.description'
+    author: Denora
+    icon: oc-icon-newspaper-o
+    homepage: ''
