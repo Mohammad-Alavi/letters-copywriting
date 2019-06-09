@@ -78,7 +78,7 @@ class OrderList extends ComponentBase {
     public function getRoleOptions() {
         return [
             'customer' => 'Customer',
-            'writer'   => 'Writer',
+            'author'   => 'Author',
             'admin'    => 'Admin',
         ];
     }
@@ -90,13 +90,20 @@ class OrderList extends ComponentBase {
      */
     public function getStatusOptions() {
         return [
-            'all'                    => 'All',
-            'picked'                 => 'Picked by writer',
-            'requested_for_delivery' => "Requested for delivery",
+            'all'       => 'All',
+            'created'   => 'Waiting for pricing',
+            'priced'    => "Waiting to be paid",
+            'paid'      => "Waiting to be assigned",
+            'assigned'  => "Waiting to be done",
+            'done'      => "Waiting to be delivered",
+            'rejected'  => "Waiting to be edited",
+            'delivered' => "Delivered to the customer",
         ];
     }
 
-    public function onRun() {
+    public function init() {
+        parent::init();
+
         $this->repository = new OrderRepository();
 
         $this->userRole = $this->property('role');
