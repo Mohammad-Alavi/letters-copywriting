@@ -11,13 +11,13 @@ class Status extends Model {
 
     protected $dates = ['deleted_at'];
 
-    static $CREATED   = 'created';
-    static $PAID      = 'paid';
-    static $ASSIGNED  = 'assigned';
-    static $DONE      = 'done';
-    static $REJECTED  = 'rejected';
-    static $DELIVERED = 'delivered';
-
+    static $CREATED   = 'created';  //  Is done by customer
+    static $PRICED    = 'priced';  //  Is done by admin
+    static $PAID      = 'paid';  //  Is done by customer
+    static $ASSIGNED  = 'assigned';  //  Is done by admin
+    static $DONE      = 'done';  //  Is done by author
+    static $REJECTED  = 'rejected';  //  Is done by admin
+    static $DELIVERED = 'delivered';  //  Is done by admin
 
     /**
      * @var string The database table used by the model.

@@ -44,6 +44,13 @@ class Order extends Model {
     /**
      * @param string $description
      */
+    public function setStatusPriced(string $description = '') {
+        $this->setNewStatus(Status::$PRICED, $description);
+    }
+
+    /**
+     * @param string $description
+     */
     public function setStatusPaid(string $description = '') {
         $this->setNewStatus(Status::$PAID, $description);
     }
