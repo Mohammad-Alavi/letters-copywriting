@@ -30,6 +30,10 @@ class Order extends Model {
         'statuses' => 'Denora\Letterwriting\Models\Status'
     ];
 
+    public function getStatusAttribute(){
+        return $this->statuses->last();
+    }
+
     /**
      * @param string $description
      */
