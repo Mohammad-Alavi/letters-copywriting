@@ -93,4 +93,26 @@ class OrderDetails extends ComponentBase {
         return Redirect::back();
     }
 
+    /**
+     * REMEMBER: This must be shown only to admins
+     *
+     * @return mixed
+     */
+    public function onDeliver(){
+        //  TODO: Check if the user is an admin
+        $this->order->setStatusDelivered();
+        return Redirect::back();
+    }
+
+    /**
+     * REMEMBER: This must be shown only to admins
+     *
+     * @return mixed
+     */
+    public function onReject(){
+        //  TODO: Check if the user is an admin
+        $this->order->setStatusRejected();
+        return Redirect::back();
+    }
+
 }
