@@ -30,49 +30,49 @@ class Order extends Model {
         'statuses' => 'Denora\Letterwriting\Models\Status'
     ];
 
-    public function getStatusAttribute(){
+    public function getStatusAttribute() {
         return $this->statuses->last();
     }
 
     /**
      * @param string $description
      */
-    public function setStatusCreated(string $description = ''){
+    public function setStatusCreated(string $description = '') {
         $this->setNewStatus(Status::$CREATED, $description);
     }
 
     /**
      * @param string $description
      */
-    public function setStatusPaid(string $description = ''){
+    public function setStatusPaid(string $description = '') {
         $this->setNewStatus(Status::$PAID, $description);
     }
 
     /**
      * @param string $description
      */
-    public function setStatusPicked(string $description = ''){
-        $this->setNewStatus(Status::$PICKED, $description);
+    public function setStatusAssigned(string $description = '') {
+        $this->setNewStatus(Status::$ASSIGNED, $description);
     }
 
     /**
      * @param string $description
      */
-    public function setStatusDone(string $description = ''){
+    public function setStatusDone(string $description = '') {
         $this->setNewStatus(Status::$DONE, $description);
     }
 
     /**
      * @param string $description
      */
-    public function setStatusRejected(string $description = ''){
+    public function setStatusRejected(string $description = '') {
         $this->setNewStatus(Status::$REJECTED, $description);
     }
 
     /**
      * @param string $description
      */
-    public function setStatusDelivered(string $description = ''){
+    public function setStatusDelivered(string $description = '') {
         $this->setNewStatus(Status::$DELIVERED, $description);
     }
 

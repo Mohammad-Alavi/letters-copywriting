@@ -65,7 +65,7 @@ class OrderDetails extends ComponentBase {
     public function getRoleOptions() {
         return [
             'customer' => 'Customer',
-            'writer'   => 'Writer',
+            'author'   => 'Author',
             'admin'    => 'Admin',
         ];
     }
@@ -87,9 +87,9 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onDeliver(){
+    public function onDone(){
         //  TODO: Check if the user is an author
-        $this->order->setStatusDelivered();
+        $this->order->setStatusDone();
         return Redirect::back();
     }
 

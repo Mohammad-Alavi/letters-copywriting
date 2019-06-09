@@ -11,11 +11,11 @@ class Status extends Model {
 
     protected $dates = ['deleted_at'];
 
-    static $CREATED = 'created';
-    static $PAID = 'paid';
-    static $PICKED = 'picked';
-    static $DONE = 'done';
-    static $REJECTED = 'rejected';
+    static $CREATED   = 'created';
+    static $PAID      = 'paid';
+    static $ASSIGNED  = 'assigned';
+    static $DONE      = 'done';
+    static $REJECTED  = 'rejected';
     static $DELIVERED = 'delivered';
 
 
