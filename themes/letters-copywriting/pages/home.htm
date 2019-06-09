@@ -9,6 +9,10 @@ user_id = 0
 [orderHistory]
 role = "customer"
 order_id = 1
+
+[orderDetails]
+role = "customer"
+order_id = 1
 ==
 <div class="container">
     <div class="row">
@@ -17,6 +21,8 @@ order_id = 1
             <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>
             <hr>
             {% component 'newOrder' %}
+            <hr>
+            {% component 'orderDetails' %}
             <hr>
             {% component 'orderHistory' %}
         </div>

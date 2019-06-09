@@ -5,6 +5,7 @@ namespace Denora\Letterwriting\Components;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
+use Illuminate\Support\Facades\Redirect;
 use PhpParser\Node\Scalar\String_;
 
 class OrderDetails extends ComponentBase {
@@ -69,13 +70,27 @@ class OrderDetails extends ComponentBase {
         ];
     }
 
-    public function onRun() {
+    public function init() {
+        parent::init();
+
         $this->repository = new OrderRepository();
 
         $this->role = $this->property('role');
-        $orderId = $this->property('order_id');
 
+        $orderId = $this->property('order_id');
         $this->order = $this->repository->find($orderId);
+
+    }
+
+    /**
+     * REMEMBER: This must be shown only to authors
+     *
+     * @return mixed
+     */
+    public function onDeliver(){
+        //  TODO: Check if the user is an author
+        $this->order->setStatusDelivered();
+        return Redirect::back();
     }
 
 }
