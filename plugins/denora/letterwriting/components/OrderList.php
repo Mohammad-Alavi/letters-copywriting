@@ -2,6 +2,7 @@
 
 namespace Denora\Letterwriting\Components;
 
+use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
@@ -31,6 +32,12 @@ class OrderList extends ComponentBase {
      * @var OrderRepository
      */
     private $repository;
+
+    public function __construct(CodeBase $cmsObject = null, $properties = []) {
+        parent::__construct($cmsObject, $properties);
+
+        $this->repository = new OrderRepository();
+    }
 
     /**
      * Returns information about this component, including name and description.
@@ -91,26 +98,24 @@ class OrderList extends ComponentBase {
     public function getStatusOptions() {
         return [
             'all'       => 'All',
-            'created'   => 'Waiting for pricing',
-            'priced'    => "Waiting to be paid",
-            'paid'      => "Waiting to be assigned",
-            'assigned'  => "Waiting to be done",
-            'done'      => "Waiting to be delivered",
-            'rejected'  => "Waiting to be edited",
-            'delivered' => "Delivered to the customer",
+            'created'   => 'Waiting for pricing (created)',
+            'priced'    => 'Waiting to be paid (priced)',
+            'paid'      => 'Waiting to be assigned (paid)',
+            'assigned'  => 'Waiting to be done (assigned)',
+            'done'      => 'Waiting to be delivered (done)',
+            'rejected'  => 'Waiting to be edited (rejected)',
+            'delivered' => 'Delivered to the customer (delivered)',
         ];
     }
 
     public function init() {
         parent::init();
 
-        $this->repository = new OrderRepository();
-
         $this->userRole = $this->property('role');
         $this->userId = $this->property('user_id');
         $this->orderStatus = $this->property('status');
 
-        $this->orderList = $this->repository->all();
+        $this->orderList = $this->repository->paginate($this->orderStatus);
     }
 
 }

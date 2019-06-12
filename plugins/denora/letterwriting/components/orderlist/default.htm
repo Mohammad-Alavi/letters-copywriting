@@ -2,6 +2,7 @@
 
 <ul>
     {% for order in orderList %}
-    <li>{{ order.description }}</li>
+    <li>[{{ order.id }}] ({{ order.status }})</li>
     {% endfor %}
 </ul>
+{{ orderList.render|raw }}

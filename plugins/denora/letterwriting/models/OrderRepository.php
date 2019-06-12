@@ -2,22 +2,29 @@
 
 namespace Denora\Letterwriting\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class OrderRepository {
 
     /**
      * @param int $id
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     * @return Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
-    function find(int $id){
+    function find(int $id) {
         return Order::find($id);
     }
 
     /**
-     * @return Order[]|\Illuminate\Database\Eloquent\Collection
+     * @param string $status
+     * @param int    $perPage
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function all() {
-        return Order::all();
+    function paginate(string $status, int $perPage = 20) {
+        if ($status === 'all') return Order::query()->paginate($perPage);
+
+        return Order::query()->where(['status' => $status])->paginate($perPage);
     }
 
     /**
@@ -45,6 +52,16 @@ class OrderRepository {
 
         return $order;
 
+    }
+
+    /**
+     * @param int    $orderId
+     * @param string $newStatusLabel
+     */
+    function changeStatus(int $orderId, string $newStatusLabel) {
+        $order = $this->find($orderId);
+        $order->status = $newStatusLabel;
+        $order->save();
     }
 
 
