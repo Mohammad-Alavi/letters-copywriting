@@ -30,10 +30,6 @@ class Order extends Model {
         'statuses' => 'Denora\Letterwriting\Models\Status'
     ];
 
-    public function getStatusAttribute() {
-        return $this->statuses->last();
-    }
-
     /**
      * @param string $description
      */
@@ -88,9 +84,11 @@ class Order extends Model {
      * @param string $description
      */
     private function setNewStatus(string $label, string $description) {
-        $repository = new StatusRepository();
+        $orderRepository = new OrderRepository();
+        $statusRepository = new StatusRepository();
 
-        $repository->create($this->id, $label, $description);
+        $orderRepository->changeStatus($this->id, $label);
+        $statusRepository->create($this->id, $label, $description);
     }
 
 }
