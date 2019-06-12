@@ -17,14 +17,18 @@ class OrderRepository {
 
     /**
      * @param string $status
+     * @param string $category
      * @param int    $perPage
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function paginate(string $status, int $perPage = 20) {
-        if ($status === 'all') return Order::query()->paginate($perPage);
+    function paginate(string $status, string $category, int $perPage = 20) {
+        $query = Order::query();
 
-        return Order::query()->where(['status' => $status])->paginate($perPage);
+        if ($status != 'all') $query->where(['status' => $status]);
+        if ($category != 'all') $query->where(['category' => $category]);
+
+        return $query->paginate($perPage);
     }
 
     /**

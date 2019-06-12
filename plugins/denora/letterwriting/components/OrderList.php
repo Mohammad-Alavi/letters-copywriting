@@ -4,6 +4,7 @@ namespace Denora\Letterwriting\Components;
 
 use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
+use Denora\Letterwriting\Models\Category;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
 
@@ -18,6 +19,11 @@ class OrderList extends ComponentBase {
      * @var String
      */
     public $orderStatus;
+
+    /**
+     * @var String
+     */
+    public $orderCategory;
 
     /**
      * @var String
@@ -55,19 +61,25 @@ class OrderList extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'role'    => [
+            'role'     => [
                 'title'       => 'Role',
                 'description' => 'Component items change according to user\'s role',
                 'type'        => 'dropdown',
                 'default'     => 'customer',
             ],
-            'status'  => [
+            'status'   => [
                 'title'       => 'Status',
                 'description' => 'Status of orders',
                 'type'        => 'dropdown',
                 'default'     => 'all',
             ],
-            'user_id' => [
+            'category' => [
+                'title'       => 'Category',
+                'description' => 'Category of orders',
+                'type'        => 'dropdown',
+                'default'     => 'all',
+            ],
+            'user_id'  => [
                 'title'             => 'User ID',
                 'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
                 'default'           => 0,
@@ -108,14 +120,30 @@ class OrderList extends ComponentBase {
         ];
     }
 
+    /**
+     * Returns dropdown options for 'category' property
+     *
+     * @return array
+     */
+    public function getCategoryOptions() {
+        $categoryList = Category::all();
+        $categoryArray['all'] = 'All';
+        foreach ($categoryList as $category) {
+            $categoryArray[$category['label']] = $category['label'];
+        }
+
+        return $categoryArray;
+    }
+
     public function init() {
         parent::init();
 
         $this->userRole = $this->property('role');
         $this->userId = $this->property('user_id');
         $this->orderStatus = $this->property('status');
+        $this->orderCategory = $this->property('category');
 
-        $this->orderList = $this->repository->paginate($this->orderStatus);
+        $this->orderList = $this->repository->paginate($this->orderStatus, $this->orderCategory);
     }
 
 }
