@@ -19,11 +19,7 @@ forceSecure = 0
 {% partial 'account::login' %}
 
 {% else %}
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            {% partial 'letterwriting/new_order' %}
-        </div>
-    </div>
-</div>
+
+{% partial 'letterwriting/new_order' %}
+
 {% endif %}
