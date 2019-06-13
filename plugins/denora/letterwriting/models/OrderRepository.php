@@ -17,14 +17,18 @@ class OrderRepository {
 
     /**
      * @param string $status
+     * @param string $category
      * @param int    $perPage
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function paginate(string $status, int $perPage = 20) {
-        if ($status === 'all') return Order::query()->paginate($perPage);
+    function paginate(string $status, string $category, int $perPage = 20) {
+        $query = Order::query();
 
-        return Order::query()->where(['status' => $status])->paginate($perPage);
+        if ($status != 'all') $query->where(['status' => $status]);
+        if ($category != 'all') $query->where(['category' => $category]);
+
+        return $query->paginate($perPage);
     }
 
     /**
@@ -32,18 +36,20 @@ class OrderRepository {
      * @param int    $customerId
      * @param string $description
      * @param string $language
+     * @param string $category
      * @param float  $price
      * @param bool   $isRush
      *
      * @return Order
      */
-    function create(int $customerId, string $description, string $language, float $price, bool $isRush = false) {
+    function create(int $customerId, string $description, string $language, string $category, float $price, bool $isRush = false) {
 
         $order = new Order();
         $order->customer_id = $customerId;
         $order->description = $description;
         $order->is_rush = $isRush;
         $order->language = $language;
+        $order->category = $category;
         $order->price = $price;
 
         $order->save();

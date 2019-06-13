@@ -4,6 +4,7 @@ namespace Denora\Letterwriting\Components;
 
 use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
+use Denora\Letterwriting\Models\Category;
 use Denora\Letterwriting\Models\OrderRepository;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -16,6 +17,12 @@ class NewOrder extends ComponentBase {
      * @var int
      */
     public $userId;
+
+    /**
+     * @var Category[]
+     */
+    public $categoryList;
+
     /**
      * @var OrderRepository
      */
@@ -54,8 +61,9 @@ class NewOrder extends ComponentBase {
         ];
     }
 
-    public function onRun() {
+    public function init() {
         $this->userId = $this->property('user_id');
+        $this->categoryList = Category::all();
     }
 
     public function onCreateOrder() {
@@ -65,12 +73,14 @@ class NewOrder extends ComponentBase {
 
         $description = Input::get('description');
         $language = Input::get('language');
+        $category = Input::get('category');
         $isRush = Input::get('is_rush', 0);
 
         $this->repository->create(
             123,
             $description,
             $language,
+            $category,
             0.0,
             $isRush
         );

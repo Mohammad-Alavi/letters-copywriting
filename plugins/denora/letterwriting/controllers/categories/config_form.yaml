@@ -1,0 +1,10 @@
+name: Categories
+form: $/denora/letterwriting/models/category/fields.yaml
+modelClass: Denora\Letterwriting\Models\Category
+defaultRedirect: denora/letterwriting/categories
+create:
+    redirect: 'denora/letterwriting/categories/update/:id'
+    redirectClose: denora/letterwriting/categories
+update:
+    redirect: denora/letterwriting/categories
+    redirectClose: denora/letterwriting/categories
