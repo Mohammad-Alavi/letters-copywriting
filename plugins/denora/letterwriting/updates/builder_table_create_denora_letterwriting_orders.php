@@ -12,7 +12,7 @@ class BuilderTableCreateDenoraLetterwritingOrders extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('customer_id');
-            $table->integer('writer_id')->nullable();
+            $table->integer('author_id')->nullable();
             $table->text('description');
             $table->boolean('is_rush')->default(0);
             $table->string('language');

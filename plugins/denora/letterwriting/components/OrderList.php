@@ -143,7 +143,7 @@ class OrderList extends ComponentBase {
         $this->orderStatus = $this->property('status');
         $this->orderCategory = $this->property('category');
 
-        $this->orderList = $this->repository->paginate($this->orderStatus, $this->orderCategory);
+        $this->orderList = $this->repository->paginate($this->orderStatus, $this->orderCategory, $this->userRole, $this->userId);
     }
 
 }

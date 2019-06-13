@@ -18,15 +18,28 @@ class OrderRepository {
     /**
      * @param string $status
      * @param string $category
+     * @param string $userRole
+     * @param string $userId
      * @param int    $perPage
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    function paginate(string $status, string $category, int $perPage = 20) {
+    function paginate(string $status, string $category, string $userRole, string $userId, int $perPage = 20) {
         $query = Order::query();
 
         if ($status != 'all') $query->where(['status' => $status]);
         if ($category != 'all') $query->where(['category' => $category]);
+
+        switch ($userRole){
+            case 'author':{
+                $query->where(['author_id' => $userId]);
+                break;
+            }
+            case 'customer':{
+                $query->where(['customer_id' => $userId]);
+                break;
+            }
+        }
 
         return $query->paginate($perPage);
     }
