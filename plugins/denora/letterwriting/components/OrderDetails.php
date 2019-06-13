@@ -2,6 +2,7 @@
 
 namespace Denora\Letterwriting\Components;
 
+use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
@@ -24,6 +25,18 @@ class OrderDetails extends ComponentBase {
      * @var OrderRepository
      */
     private $repository;
+
+    /**
+     * Component constructor. Takes in the page or layout code section object
+     * and properties set by the page or layout.
+     * @param null|CodeBase $cmsObject
+     * @param array $properties
+     */
+    public function __construct(CodeBase $cmsObject = null, $properties = []) {
+        parent::__construct($cmsObject, $properties);
+
+        $this->repository = new OrderRepository();
+    }
 
     /**
      * Returns information about this component, including name and description.
@@ -73,13 +86,19 @@ class OrderDetails extends ComponentBase {
     public function init() {
         parent::init();
 
-        $this->repository = new OrderRepository();
-
         $this->role = $this->property('role');
 
         $orderId = $this->property('order_id');
-        $this->order = $this->repository->find($orderId);
+        $this->order = $this->getOrder($orderId);
+    }
 
+    /**
+     * @param int $orderId
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getOrder(int $orderId){
+        return $this->repository->find($orderId);
     }
 
     /**
