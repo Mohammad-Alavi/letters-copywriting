@@ -21,8 +21,13 @@ security = "all"
                     <a class="nav-link" href="{{ 'profile'|page }}">{% if user %}Profile{% else %}Login | Register{%
                         endif %}</a>
                 </li>
+                {% if user %}
+                <li class="nav-item {% if this.page.id == 'my-orders' %}active{% endif %}">
+                    <a class="nav-link" href="{{ 'my-orders'|page }}">My Orders</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
-            <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
+        <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
     </div>
 </nav>
