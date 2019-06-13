@@ -1,5 +1,16 @@
+{% set categoryList = __SELF__.categoryList %}
+
 <form data-request="onCreateOrder">
 
+    <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" name="category">
+            {% for category in categoryList %}
+            <option value="{{ category.label }}">{{ category.label }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
     <div class="form-group">
         <label>Description</label>
         <input class="form-control" type="text" name="description">
