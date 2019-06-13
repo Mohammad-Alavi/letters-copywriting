@@ -11,19 +11,12 @@ user_id = 0
 redirect = "order"
 paramCode = "code"
 forceSecure = 0
+
+[sociallogin]
 ==
 {% if not user %}
 
 {% partial 'account::login' %}
-
-<div class="row">
-    <div class="col-12 text-center register">
-        <p>
-            Don't have an account yet?
-        </p>
-        <div><a href="register" class="btn btn-info">Join Now</a></div>
-    </div>
-</div>
 
 {% else %}
 <div class="container">
