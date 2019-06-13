@@ -4,3 +4,13 @@ plugin:
     author: Denora
     icon: oc-icon-newspaper-o
     homepage: ''
+navigation:
+    main-menu-item:
+        label: 'Letter Writing'
+        url: denora/letterwriting/categories
+        icon: icon-life-ring
+        sideMenu:
+            side-menu-item:
+                label: Categories
+                url: denora/letterwriting/categories
+                icon: icon-sitemap

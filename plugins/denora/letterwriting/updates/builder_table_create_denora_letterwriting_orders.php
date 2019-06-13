@@ -16,6 +16,7 @@ class BuilderTableCreateDenoraLetterwritingOrders extends Migration
             $table->text('description');
             $table->boolean('is_rush')->default(0);
             $table->string('language');
+            $table->string('category');
             $table->double('price');
             $table->string('status')->default('created');
             $table->timestamp('created_at')->nullable();
