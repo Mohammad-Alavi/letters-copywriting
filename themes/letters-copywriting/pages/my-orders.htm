@@ -3,4 +3,24 @@ url = "/my-orders"
 layout = "default"
 description = "Customer orders detail page"
 is_hidden = 0
+
+[orderList]
+role = "customer"
+status = "all"
+category = "all"
 ==
+{% set id = 'id' %}
+
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            {% partial 'letterwriting/order_list' %}
+        </div>
+    </div>
+</div>
+{% endif %}
