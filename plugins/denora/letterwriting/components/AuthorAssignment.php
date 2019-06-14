@@ -93,8 +93,13 @@ class AuthorAssignment extends ComponentBase {
      * @return mixed
      */
     public function onAssignAuthor(){
+<<<<<<< HEAD
         //  TODO: Check if the user is an admin.
         $authorId = Input::get('author_id');
+=======
+        //  TODO: Check if the user is an admin
+        $authorId = (int)Input::get('author_id');
+>>>>>>> 8669775b5f8c99efe995d640952dc83391389198
         $this->order->setStatusAssigned($this->adminId, $authorId);
         return Redirect::back();
     }
