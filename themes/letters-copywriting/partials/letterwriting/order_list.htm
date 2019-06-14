@@ -1,33 +1,42 @@
 {% set orderList = orderList.orderList %}
 
-<table class="table table-striped table-bordered table-hover table-responsive-sm">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Order ID</th>
-        <th scope="col">Category</th>
-        <th scope="col">Description</th>
-        <th scope="col">Status</th>
-        <th scope="col">Is Rush</th>
-        <th scope="col">Creation Date</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for order in orderList %}
-    <tr>
-        <!--        <th scope="row">1</th>-->
+<div class="container">
+    <div class="row margin-top-75">
+        <div class="col-12 text-center">
+            <p class="float-left">Type something in the input field to search the table for Category, Description, Status, etc...</p>
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+            <table class="table table-striped table-bordered table-hover table-responsive-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Is Rush</th>
+                    <th scope="col">Creation Date</th>
+                </tr>
+                </thead>
+                <tbody id="order-list-tbody">
+                {% for order in orderList %}
+                <tr>
+                    <!--        <th scope="row">1</th>-->
 
-        <td>
-            <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">{{ order.id }}
-            </button>
-        </td>
-        <td>{{ order.category }}</td>
-        <td>{{ order.description }}</td>
-        <td>{{ order.status }}</td>
-        <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
-        <td>{{ order.created_at }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-
+                    <td>
+                        <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">{{
+                            order.id }}
+                        </button>
+                    </td>
+                    <td>{{ order.category }}</td>
+                    <td>{{ order.description }}</td>
+                    <td>{{ order.status }}</td>
+                    <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
+                    <td>{{ order.created_at }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {{ orderList.render|raw }}
