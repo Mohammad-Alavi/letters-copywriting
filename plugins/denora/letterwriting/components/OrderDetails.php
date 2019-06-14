@@ -6,8 +6,8 @@ use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use PhpParser\Node\Scalar\String_;
 
 class OrderDetails extends ComponentBase {
 
@@ -17,9 +17,14 @@ class OrderDetails extends ComponentBase {
     public $order;
 
     /**
+     * @var int
+     */
+    public $userId;
+
+    /**
      * @var String
      */
-    public $role;
+    public $userRole;
 
     /**
      * @var OrderRepository
@@ -29,8 +34,9 @@ class OrderDetails extends ComponentBase {
     /**
      * Component constructor. Takes in the page or layout code section object
      * and properties set by the page or layout.
+     *
      * @param null|CodeBase $cmsObject
-     * @param array $properties
+     * @param array         $properties
      */
     public function __construct(CodeBase $cmsObject = null, $properties = []) {
         parent::__construct($cmsObject, $properties);
@@ -54,13 +60,20 @@ class OrderDetails extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'role'     => [
-                'title'       => 'Role',
+            'user_id'   => [
+                'title'             => 'User ID',
+                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
+                'default'           => 0,
+                'validationPattern' => '^[0-9]+$',
+                'validationMessage' => 'Enter a valid number'
+            ],
+            'role' => [
+                'title'       => 'User Role',
                 'description' => 'Component items change according to user\'s role',
                 'type'        => 'dropdown',
                 'default'     => 'customer',
             ],
-            'order_id' => [
+            'order_id'  => [
                 'title'             => 'Order ID',
                 'description'       => 'ID of the order',
                 'default'           => 0,
@@ -86,7 +99,8 @@ class OrderDetails extends ComponentBase {
     public function init() {
         parent::init();
 
-        $this->role = $this->property('role');
+        $this->userId = $this->property('user_id');
+        $this->userRole = $this->property('role');
 
         $orderId = $this->property('order_id');
         $this->order = $this->getOrder($orderId);
@@ -97,7 +111,7 @@ class OrderDetails extends ComponentBase {
      *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
      */
-    public function getOrder(int $orderId){
+    public function getOrder(int $orderId) {
         return $this->repository->find($orderId);
     }
 
@@ -106,9 +120,10 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onDone(){
+    public function onDone() {
         //  TODO: Check if the user is an author
-        $this->order->setStatusDone();
+        $this->order->setStatusDone($this->userId);
+
         return Redirect::back();
     }
 
@@ -117,9 +132,10 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onDeliver(){
+    public function onDeliver() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusDelivered();
+        $this->order->setStatusDelivered($this->userId);
+
         return Redirect::back();
     }
 
@@ -128,9 +144,23 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onReject(){
+    public function onReject() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusRejected();
+        $this->order->setStatusRejected($this->userId);
+
+        return Redirect::back();
+    }
+
+    /**
+     * REMEMBER: This must be shown only to admins
+     *
+     * @return mixed
+     */
+    public function onPriced() {
+        //  TODO: Check if the user is an admin
+        $price = Input::get('price');
+        $this->order->setStatusPriced($this->userId, $price);
+
         return Redirect::back();
     }
 

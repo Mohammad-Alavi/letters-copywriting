@@ -11,6 +11,7 @@ class BuilderTableCreateDenoraLetterwritingStatuses extends Migration
         {
             $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->integer('doer_id');
             $table->integer('order_id');
             $table->string('label');
             $table->text('description');
