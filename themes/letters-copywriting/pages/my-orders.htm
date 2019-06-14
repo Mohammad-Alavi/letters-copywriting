@@ -4,12 +4,32 @@ layout = "default"
 description = "Customer orders detail page"
 is_hidden = 0
 
-[orderList]
+[orderList adminOrderList]
+role = "admin"
+status = "all"
+category = "all"
+user_id = 0
+
+[orderList authorOrderList]
+role = "author"
+status = "all"
+category = "all"
+user_id = 0
+
+[orderList customerOrderList]
 role = "customer"
 status = "all"
 category = "all"
+user_id = 0
 ==
-{% set id = 'id' %}
+<?php
+function onStart()
+{
+    $this['user'] = Auth::getUser();
+}
+?>
+==
+{% set id = user.id %}
 
 {% if not user %}
 
@@ -17,6 +37,20 @@ category = "all"
 
 {% else %}
 
-{% partial 'letterwriting/order_list' %}
+<div class="col-12">
+
+    {% if inGroup('admin') %}
+    {% component 'adminOrderList' user_id=id %}
+
+    {% elseif inGroup('author') %}
+    {% component 'authorOrderList' user_id=id %}
+
+    <!-- if not admin or author then we assume it is a customer by default -->
+    {% else %}
+    {% component 'customerOrderList' user_id=id %}
+
+    {% endif %}
+
+</div>
 
 {% endif %}
