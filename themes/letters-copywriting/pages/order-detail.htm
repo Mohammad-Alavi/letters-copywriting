@@ -10,4 +10,12 @@ order_id = "{{ :id }}"
 ==
 {% set id = 'id' %}
 
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+
 {% partial 'letterwriting/order_details' %}
+
+{% endif %}
