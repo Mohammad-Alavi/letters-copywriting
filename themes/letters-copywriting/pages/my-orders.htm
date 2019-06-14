@@ -16,11 +16,7 @@ category = "all"
 {% partial 'account::login' %}
 
 {% else %}
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            {% partial 'letterwriting/order_list' %}
-        </div>
-    </div>
-</div>
+
+{% partial 'letterwriting/order_list' %}
+
 {% endif %}
