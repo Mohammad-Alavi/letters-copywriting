@@ -2,6 +2,7 @@ columns:
     id:
         label: id
         type: number
+        sortable: true
     label:
         label: label
         type: text
@@ -11,6 +12,11 @@ columns:
         label: description
         type: text
         searchable: true
+    price:
+        label: price
+        type: text
+        searchable: true
+        sortable: true
     created_at:
         label: created_at
         type: datetime
