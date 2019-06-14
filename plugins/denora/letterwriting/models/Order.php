@@ -62,9 +62,11 @@ class Order extends Model {
 
     /**
      * @param int    $doerId
+     * @param float  $price
      * @param string $description
      */
-    public function setStatusPriced(int $doerId, string $description = '') {
+    public function setStatusPriced(int $doerId, $price, string $description = '') {
+        $this->orderRepository->changePrice($this->id, $price);
         $this->setNewStatus($doerId, Status::$PRICED, $description);
     }
 

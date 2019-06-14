@@ -76,8 +76,7 @@ class NewOrder extends ComponentBase {
         $category = Input::get('category');
         $isRush = Input::get('is_rush', 0);
 
-        $price = ($category == 'custom') ? null :
-            Category::query()->where('label', '=', $category)->first()->price;
+        $price = Category::query()->where('label', '=', $category)->first()->price;
 
         $this->repository->create(
             $this->userId,

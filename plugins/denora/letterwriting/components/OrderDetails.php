@@ -6,6 +6,7 @@ use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class OrderDetails extends ComponentBase {
@@ -146,6 +147,19 @@ class OrderDetails extends ComponentBase {
     public function onReject() {
         //  TODO: Check if the user is an admin
         $this->order->setStatusRejected($this->userId);
+
+        return Redirect::back();
+    }
+
+    /**
+     * REMEMBER: This must be shown only to admins
+     *
+     * @return mixed
+     */
+    public function onPriced() {
+        //  TODO: Check if the user is an admin
+        $price = Input::get('price');
+        $this->order->setStatusPriced($this->userId, $price);
 
         return Redirect::back();
     }

@@ -7,7 +7,7 @@ fields:
     price:
         label: Price
         span: right
-        required: 1
+        required: 0
         type: number
     description:
         label: Description
