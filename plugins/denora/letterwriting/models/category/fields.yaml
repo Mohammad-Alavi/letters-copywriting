@@ -4,6 +4,11 @@ fields:
         span: left
         required: 1
         type: text
+    price:
+        label: Price
+        span: right
+        required: 0
+        type: number
     description:
         label: Description
         size: tiny

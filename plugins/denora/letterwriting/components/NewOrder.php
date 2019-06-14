@@ -76,16 +76,19 @@ class NewOrder extends ComponentBase {
         $category = Input::get('category');
         $isRush = Input::get('is_rush', 0);
 
+        $price = Category::query()->where('label', '=', $category)->first()->price;
+
         $this->repository->create(
             $this->userId,
             $description,
             $language,
             $category,
-            0.0,
+            $price,
             $isRush
         );
 
         Flash::success('New order has been created successfully');
+
         return Redirect::back();
     }
 

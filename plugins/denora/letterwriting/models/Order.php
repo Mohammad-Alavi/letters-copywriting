@@ -7,10 +7,32 @@ class Order extends Model {
     use \October\Rain\Database\Traits\SoftDelete;
 
     /**
+     * @var OrderRepository
+     */
+    private $orderRepository;
+
+    /**
+     * @var StatusRepository
+     */
+    private $statusRepository;
+
+    /**
+     * Constructor
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = []) {
+        parent::__construct($attributes);
+
+        $this->orderRepository = new OrderRepository();
+        $this->statusRepository = new StatusRepository();
+
+    }
+
+    /**
      * @var array
      */
     protected $dates = ['deleted_at'];
-
 
     /**
      * @var string The database table used by the model.
@@ -31,64 +53,73 @@ class Order extends Model {
     ];
 
     /**
+     * @param int    $doerId
      * @param string $description
      */
-    public function setStatusCreated(string $description = '') {
-        $this->setNewStatus(Status::$CREATED, $description);
+    public function setStatusCreated(int $doerId, string $description = '') {
+        $this->setNewStatus($doerId, Status::$CREATED, $description);
     }
 
     /**
+     * @param int    $doerId
+     * @param float  $price
      * @param string $description
      */
-    public function setStatusPriced(string $description = '') {
-        $this->setNewStatus(Status::$PRICED, $description);
+    public function setStatusPriced(int $doerId, $price, string $description = '') {
+        $this->orderRepository->changePrice($this->id, $price);
+        $this->setNewStatus($doerId, Status::$PRICED, $description);
     }
 
     /**
+     * @param int    $doerId
      * @param string $description
      */
-    public function setStatusPaid(string $description = '') {
-        $this->setNewStatus(Status::$PAID, $description);
+    public function setStatusPaid(int $doerId, string $description = '') {
+        $this->setNewStatus($doerId, Status::$PAID, $description);
     }
 
     /**
+     * @param int    $doerId
+     * @param int    $authorId
      * @param string $description
      */
-    public function setStatusAssigned(string $description = '') {
-        $this->setNewStatus(Status::$ASSIGNED, $description);
+    public function setStatusAssigned(int $doerId, int $authorId, string $description = '') {
+        $this->orderRepository->assignAuthor($this->id, $authorId);
+        $this->setNewStatus($doerId, Status::$ASSIGNED, $description);
     }
 
     /**
+     * @param int    $doerId
      * @param string $description
      */
-    public function setStatusDone(string $description = '') {
-        $this->setNewStatus(Status::$DONE, $description);
+    public function setStatusDone(int $doerId, string $description = '') {
+        $this->setNewStatus($doerId, Status::$DONE, $description);
     }
 
     /**
+     * @param int    $doerId
      * @param string $description
      */
-    public function setStatusRejected(string $description = '') {
-        $this->setNewStatus(Status::$REJECTED, $description);
+    public function setStatusRejected(int $doerId, string $description = '') {
+        $this->setNewStatus($doerId, Status::$REJECTED, $description);
     }
 
     /**
+     * @param int    $doerId
      * @param string $description
      */
-    public function setStatusDelivered(string $description = '') {
-        $this->setNewStatus(Status::$DELIVERED, $description);
+    public function setStatusDelivered(int $doerId, string $description = '') {
+        $this->setNewStatus($doerId, Status::$DELIVERED, $description);
     }
 
     /**
+     * @param int    $doerId
      * @param string $label
      * @param string $description
      */
-    private function setNewStatus(string $label, string $description) {
-        $orderRepository = new OrderRepository();
-        $statusRepository = new StatusRepository();
-
-        $orderRepository->changeStatus($this->id, $label);
-        $statusRepository->create($this->id, $label, $description);
+    private function setNewStatus(int $doerId, string $label, string $description) {
+        $this->orderRepository->changeStatus($this->id, $label);
+        $this->statusRepository->create($doerId, $this->id, $label, $description);
     }
 
 }

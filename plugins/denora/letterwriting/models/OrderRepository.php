@@ -55,7 +55,7 @@ class OrderRepository {
      *
      * @return Order
      */
-    function create(int $customerId, string $description, string $language, string $category, float $price, bool $isRush = false) {
+    function create(int $customerId, string $description, string $language, string $category, $price, bool $isRush = false) {
 
         $order = new Order();
         $order->customer_id = $customerId;
@@ -67,7 +67,8 @@ class OrderRepository {
 
         $order->save();
 
-        $order->setStatusCreated();
+        $order->setStatusCreated($customerId);
+        if ($price != null) $order->setStatusPriced($customerId, $price);
 
         return $order;
 
@@ -83,5 +84,24 @@ class OrderRepository {
         $order->save();
     }
 
+    /**
+     * @param int   $orderId
+     * @param float $price
+     */
+    function changePrice(int $orderId, $price) {
+        $order = $this->find($orderId);
+        $order->price = $price;
+        $order->save();
+    }
+
+    /**
+     * @param int $orderId
+     * @param int $authorId
+     */
+    function assignAuthor(int $orderId, int $authorId) {
+        $order = $this->find($orderId);
+        $order->author_id = $authorId;
+        $order->save();
+    }
 
 }

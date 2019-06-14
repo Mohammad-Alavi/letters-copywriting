@@ -11,10 +11,11 @@ class Plugin extends PluginBase {
      */
     public function registerComponents() {
         return [
-            'Denora\Letterwriting\Components\OrderList'    => 'orderList',
-            'Denora\Letterwriting\Components\OrderDetails' => 'orderDetails',
-            'Denora\Letterwriting\Components\OrderHistory' => 'orderHistory',
-            'Denora\Letterwriting\Components\NewOrder'     => 'newOrder',
+            'Denora\Letterwriting\Components\OrderList'        => 'orderList',
+            'Denora\Letterwriting\Components\OrderDetails'     => 'orderDetails',
+            'Denora\Letterwriting\Components\OrderHistory'     => 'orderHistory',
+            'Denora\Letterwriting\Components\NewOrder'         => 'newOrder',
+            'Denora\Letterwriting\Components\AuthorAssignment' => 'authorAssignment',
         ];
     }
 
