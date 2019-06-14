@@ -1,0 +1,18 @@
+{% set authorList = __SELF__.authorList %}
+
+
+
+<form data-request="onAssignAuthor">
+
+    <label>
+        Select an author:
+        <select name="author_id" class="form-control custom-select">
+            {% for author in authorList %}
+            <option value="{{ author.id }}">{{ author.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+
+    <button type="submit">Assign</button>
+
+</form>

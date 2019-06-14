@@ -24,15 +24,17 @@ class StatusRepository {
 
     /**
      *
+     * @param int    $doerId
      * @param int    $orderId
      * @param string $label
      * @param string $description
      *
      * @return Status
      */
-    function create(int $orderId, string $label, string $description) {
+    function create(int $doerId, int $orderId, string $label, string $description) {
 
         $status = new Status();
+        $status->doer_id = $doerId;
         $status->order_id = $orderId;
         $status->label = $label;
         $status->description = $description;

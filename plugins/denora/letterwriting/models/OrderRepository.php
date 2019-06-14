@@ -67,7 +67,7 @@ class OrderRepository {
 
         $order->save();
 
-        $order->setStatusCreated();
+        $order->setStatusCreated($customerId);
 
         return $order;
 
@@ -83,5 +83,14 @@ class OrderRepository {
         $order->save();
     }
 
+    /**
+     * @param int $orderId
+     * @param int $authorId
+     */
+    function assignAuthor(int $orderId, int $authorId) {
+        $order = $this->find($orderId);
+        $order->author_id = $authorId;
+        $order->save();
+    }
 
 }
