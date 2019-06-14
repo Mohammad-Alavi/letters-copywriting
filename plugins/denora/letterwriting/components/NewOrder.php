@@ -77,7 +77,7 @@ class NewOrder extends ComponentBase {
         $isRush = Input::get('is_rush', 0);
 
         $this->repository->create(
-            123,
+            $this->userId,
             $description,
             $language,
             $category,
