@@ -23,11 +23,20 @@ security = "all"
                 </li>
                 {% if user %}
                 <li class="nav-item {% if this.page.id == 'my-orders' %}active{% endif %}">
-                    <a class="nav-link" href="{{ 'my-orders'|page }}">My Orders</a>
+                    <a class="nav-link" href="{{ 'my-orders'|page }}">
+                        {% if inGroup('admin') %} Admin Panel
+                        {% elseif inGroup('author') %} Author Panel
+                        {% else %} My Orders
+                        {% endif %}</a>
                 </li>
                 {% endif %}
             </ul>
         </div>
+<!--        only show 'new order' btn to customer (not admin or author)-->
+        {% if inGroup('admin') %}
+        {% elseif inGroup('author') %}
+        {% else %}
         <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
+        {% endif %}
     </div>
 </nav>
