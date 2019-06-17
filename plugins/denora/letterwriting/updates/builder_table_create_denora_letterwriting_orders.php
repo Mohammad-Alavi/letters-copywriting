@@ -14,6 +14,7 @@ class BuilderTableCreateDenoraLetterwritingOrders extends Migration
             $table->integer('customer_id');
             $table->integer('author_id')->nullable();
             $table->text('description');
+            $table->text('text');
             $table->boolean('is_rush')->default(0);
             $table->string('language');
             $table->string('category');

@@ -122,7 +122,8 @@ class OrderDetails extends ComponentBase {
      */
     public function onDone() {
         //  TODO: Check if the user is an author
-        $this->order->setStatusDone($this->userId);
+        $text = Input::get('text');
+        $this->order->setStatusDone($this->userId, $text);
 
         return Redirect::back();
     }
