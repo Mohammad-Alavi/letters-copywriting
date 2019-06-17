@@ -20,4 +20,8 @@ class Comment extends Model
      */
     public $rules = [
     ];
+
+    public $belongsTo = [
+        'order' => 'Denora\Letterwriting\Models\Order'
+    ];
 }
