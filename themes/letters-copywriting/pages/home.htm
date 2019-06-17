@@ -4,20 +4,16 @@ layout = "default"
 is_hidden = 0
 
 [newOrder]
-user_id = 2
+user_id = 0
 
 [orderDetails]
-user_id = 1
+user_id = 0
 role = "customer"
-order_id = 5
+order_id = 1
 
-[orderHistory]
-role = "customer"
-order_id = 5
-
-[authorAssignment]
-admin_id = 10
-order_id = 5
+[commentList]
+user_id = 0
+order_id = 1
 ==
 <div class="container">
     <div class="row">
@@ -29,10 +25,10 @@ order_id = 5
             <hr>
             {% component 'orderDetails' %}
             <hr>
-            {% component 'orderHistory' %}
+            {% component 'commentList' %}
             <hr>
             <hr>
-            {% component 'authorAssignment' %}
+            
         </div>
     </div>
 </div>
