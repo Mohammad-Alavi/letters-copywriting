@@ -90,9 +90,14 @@ class Order extends Model {
 
     /**
      * @param int    $doerId
+     * @param string $text
      * @param string $description
      */
-    public function setStatusDone(int $doerId, string $description = '') {
+    public function setStatusDone(int $doerId, string $text, string $description = '') {
+        //  Check if the user is this order's author
+        if ($doerId != $this->author_id) return;
+
+        $this->orderRepository->setText($this->id, $text);
         $this->setNewStatus($doerId, Status::$DONE, $description);
     }
 

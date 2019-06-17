@@ -6,10 +6,14 @@
 <p><strong>Category: </strong>{{ order.category }}</p>
 
 
-{% if (order.status.label == 'picked') or (order.status.label == 'rejected') %}
+{% if (order.status.label == 'assigned') or (order.status.label == 'rejected') %}
 
 <form data-request="{{ __SELF__ }}::onDone">
 
+    <label>
+        Text:
+        <input type="text" name="text">
+    </label>
     <button type="submit">Done</button>
 
 </form>
