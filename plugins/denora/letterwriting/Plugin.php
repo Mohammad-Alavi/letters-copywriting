@@ -16,6 +16,7 @@ class Plugin extends PluginBase {
             'Denora\Letterwriting\Components\OrderHistory'     => 'orderHistory',
             'Denora\Letterwriting\Components\NewOrder'         => 'newOrder',
             'Denora\Letterwriting\Components\AuthorAssignment' => 'authorAssignment',
+            'Denora\Letterwriting\Components\CommentList'      => 'commentList',
         ];
     }
 

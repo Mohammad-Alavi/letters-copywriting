@@ -9,3 +9,6 @@
 1.0.4:
     - 'Created table denora_letterwriting_categories'
     - builder_table_create_denora_letterwriting_categories.php
+1.0.5:
+    - 'Created table denora_letterwriting_comments'
+    - builder_table_create_denora_letterwriting_comments.php

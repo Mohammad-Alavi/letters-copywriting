@@ -68,10 +68,9 @@ class OrderRepository {
         $order->save();
 
         $order->setStatusCreated($customerId);
-        if ($price != null) $order->setStatusPriced($customerId, $price);
+        if ($price != null) $order->setStatusPriced(0, $price);
 
         return $order;
-
     }
 
     /**

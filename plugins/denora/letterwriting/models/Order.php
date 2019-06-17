@@ -49,7 +49,8 @@ class Order extends Model {
      * @var array
      */
     public $hasMany = [
-        'statuses' => 'Denora\Letterwriting\Models\Status'
+        'statuses' => 'Denora\Letterwriting\Models\Status',
+        'comments' => 'Denora\Letterwriting\Models\Comment',
     ];
 
     /**
