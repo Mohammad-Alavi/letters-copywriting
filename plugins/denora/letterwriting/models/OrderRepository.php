@@ -104,4 +104,14 @@ class OrderRepository {
         $order->save();
     }
 
+    /**
+     * @param int    $orderId
+     * @param string $text
+     */
+    public function setText(int $orderId, string $text) {
+        $order = $this->find($orderId);
+        $order->text = $text;
+        $order->save();
+    }
+
 }
