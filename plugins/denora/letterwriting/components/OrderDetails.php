@@ -62,7 +62,7 @@ class OrderDetails extends ComponentBase {
         return [
             'user_id'   => [
                 'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
+                'description'       => 'ID of the user (Admin, Author, Customer, ...)',
                 'default'           => 0,
                 'validationPattern' => '^[0-9]+$',
                 'validationMessage' => 'Enter a valid number'
