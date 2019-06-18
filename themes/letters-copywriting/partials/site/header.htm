@@ -36,5 +36,11 @@ security = "all"
                 </li>
             </ul>
         </div>
+        <!--        only show 'new order' btn to customer (not admin or author)-->
+        {% if inGroup('admin') %}
+        {% elseif inGroup('author') %}
+        {% else %}
+        <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
+        {% endif %}
     </div>
 </nav>

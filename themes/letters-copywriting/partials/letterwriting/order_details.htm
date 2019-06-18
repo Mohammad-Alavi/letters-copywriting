@@ -11,9 +11,21 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Order ID: </strong>{{ order.id }}</li>
-                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>
+<!--                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>-->
                 <li class="list-group-item"><strong>Description: </strong>{{ order.description }}</li>
+
+<!--                if normal user and delivered-->
+                {% if (order.status == 'delivered') and not (inGroup('author')) and not (inGroup('admin'))%}
+                <li class="list-group-item"><strong>Text: </strong>{{ order.text }}</li>
+                {% endif %}
+
+                {% if (inGroup('author')) or (inGroup('admin'))%}
+                <li class="list-group-item"><strong>Text: </strong>{{ order.text }}</li>
+                {% endif %}
+
+                {% if not inGroup('author') %}
                 <li class="list-group-item"><strong>Price: </strong>{{ order.price }}</li>
+                {% endif %}
 
                 {% if inGroup('author') %}
                 {% if (order.status == 'assigned') or (order.status == 'rejected') %}
@@ -81,12 +93,20 @@
             <li class="{% if order.status == 'created' %}active{% endif %}">created</li>
             <li class="{% if order.status == 'priced' %}active{% endif %}">priced</li>
             <li class="{% if order.status == 'paid' %}active{% endif %}">paid</li>
+            {% if (inGroup('author')) or (inGroup('admin')) %}
             <li class="{% if order.status == 'assigned' %}active{% endif %}">assigned</li>
             <li class="{% if order.status == 'done' %}active{% endif %}">done</li>
+            {% if order.status == 'rejected' %}
             <li class="{% if order.status == 'rejected' %}active{% endif %}">rejected</li>
+            <li>delivered</li>
+            {% else %}
+            <li>accepted</li>
             <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
+            {% endif %}
+            {% else %}
+            <li class="{% if (order.status == 'assigned') or (order.status == 'done') or (order.status == 'rejected') %}active{% endif %}">in progress</li>
+            <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
+            {% endif %}
         </ul>
     </div>
 </div>
-
-<div>{{user_id}}</div>
