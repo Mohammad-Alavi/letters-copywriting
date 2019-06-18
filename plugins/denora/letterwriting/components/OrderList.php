@@ -135,8 +135,8 @@ class OrderList extends ComponentBase {
         return $categoryArray;
     }
 
-    public function init() {
-        parent::init();
+    public function onRender() {
+        parent::onRender();
 
         $this->userRole = $this->property('role');
         $this->userId = $this->property('user_id');
