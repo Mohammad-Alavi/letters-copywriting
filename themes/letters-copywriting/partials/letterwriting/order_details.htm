@@ -1,0 +1,92 @@
+{% set order = orderDetails.order %}
+{% set id = user.id %}
+
+<div class="row">
+    <div class="col-12 text-center">
+        <div class="card margin-top-50" id="order-detail-card">
+            <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+            <div class="card-body">
+                <h5 class="card-title">{{ order.category }}</h5>
+                <!--                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Order ID: </strong>{{ order.id }}</li>
+                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>
+                <li class="list-group-item"><strong>Description: </strong>{{ order.description }}</li>
+                <li class="list-group-item"><strong>Price: </strong>{{ order.price }}</li>
+
+                {% if inGroup('author') %}
+                {% if (order.status == 'assigned') or (order.status == 'rejected') %}
+                <li class="list-group-item">
+                    <form data-request="onDone">
+                        <label class="sr-only" for="inlineFormInputGroupText">Text</label>
+                        <div class="input-group">
+                            <textarea class="form-control" name="text" id="inlineFormInputGroupText"
+                                      placeholder="Text..." aria-label="Text..." required></textarea>
+                        </div>
+                            <button type="submit" class="btn btn-primary m-1">Done</button>
+                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                                  title="This section is only viewable by Authors"><i class="fa fa-info-circle"
+                                                                                     aria-hidden="true"></i></span>
+                    </form>
+                </li>
+                {% endif %}
+
+                {% elseif inGroup('admin') %}
+
+                {% if (order.status == 'done') %}
+                <li class="list-group-item">
+                    <form class="d-inline-flex" data-request="onDeliver">
+                        <button type="submit" class="btn btn-primary">Deliver</button>
+                    </form>
+                    <form class="d-inline-flex" data-request="onReject">
+                        <button type="submit" class="btn btn-danger">Reject</button>
+                    </form>
+                </li>
+                {% endif %}
+
+                <li class="list-group-item">
+                    <form data-request="onPriced">
+                        <div class="form-row align-items-center">
+                            <div class="my-1">
+                                <label class="sr-only" for="inlineFormInputGroupPrice">Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">$</div>
+                                    </div>
+                                    <input type="number" name="price" class="form-control"
+                                           id="inlineFormInputGroupPrice"
+                                           placeholder="Price">
+                                    <button type="submit" class="btn btn-primary mx-1">Submit</button>
+                                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                                          title="This is only viewable by Admins"><i class="fa fa-info-circle"
+                                                                                     aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12 text-center">
+        <ul id="order-step-progressbar" class="my-5">
+            <li class="{% if order.status == 'created' %}active{% endif %}">created</li>
+            <li class="{% if order.status == 'priced' %}active{% endif %}">priced</li>
+            <li class="{% if order.status == 'paid' %}active{% endif %}">paid</li>
+            <li class="{% if order.status == 'assigned' %}active{% endif %}">assigned</li>
+            <li class="{% if order.status == 'done' %}active{% endif %}">done</li>
+            <li class="{% if order.status == 'rejected' %}active{% endif %}">rejected</li>
+            <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
+        </ul>
+    </div>
+</div>
+
+<div>{{user_id}}</div>
