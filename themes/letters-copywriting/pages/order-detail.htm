@@ -13,18 +13,17 @@ order_id = "{{ :id }}"
 admin_id = 0
 order_id = "{{ :id }}"
 ==
-{% set admin_id = user.id %}
+{% set user_id = user.id %}
 
 {% if not user %}
 
 {% partial 'account::login' %}
 
 {% else %}
-
-{% partial 'letterwriting/order_details' %}
+{% partial 'letterwriting/order_details' user_id=user_id %}
 
 {% if inGroup('admin') %}
-{% partial 'letterwriting/author_assignment' admin_id=admin_id %}
+{% partial 'letterwriting/author_assignment' admin_id=user_id %}
 
 {% endif %}
 
