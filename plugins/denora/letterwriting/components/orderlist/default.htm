@@ -27,7 +27,7 @@
                     <td>{{ order.description }}</td>
                     <td>{{ order.status }}</td>
                     <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
-                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
                     <td class="text-center">
                         <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">View
                             Detail
