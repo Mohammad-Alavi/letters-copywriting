@@ -28,17 +28,34 @@ class OrderRepository {
         $query = Order::query();
 
         if ($status != 'all') $query->where(['status' => $status]);
-        if ($category != 'all') $query->where(['category' => $category]);
 
-        switch ($userRole){
-            case 'author':{
-                $query->where(['author_id' => $userId]);
-                break;
-            }
-            case 'customer':{
-                $query->where(['customer_id' => $userId]);
-                break;
-            }
+        switch ($category) {
+            case 'all':
+                {
+                    break;
+                }
+            case 'customer_prefer':
+                {
+                    $query->whereIn('category', [Status::$CREATED, Status::$PRICED, Status::$PAID, Status::$ASSIGNED, Status::$DONE, Status::$REJECTED]);
+                    break;
+                }
+            default:
+                {
+                    $query->where(['category' => $category]);
+                }
+        }
+
+        switch ($userRole) {
+            case 'author':
+                {
+                    $query->where(['author_id' => $userId]);
+                    break;
+                }
+            case 'customer':
+                {
+                    $query->where(['customer_id' => $userId]);
+                    break;
+                }
         }
 
         return $query->paginate($perPage);
