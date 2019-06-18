@@ -10,7 +10,7 @@ security = "all"
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <a class="navbar-brand" id="hidden-brand-xs" href="{{ 'home'|page }}">Letters Copywriting</a>
+        <a class="navbar-brand" id="{% if user %}hidden-brand-xs{% endif %}" href="{{ 'home'|page }}">Letters Copywriting</a>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-0 mt-2 mt-lg-0">
@@ -32,11 +32,13 @@ security = "all"
                 {% endif %}
             </ul>
         </div>
-<!--        only show 'new order' btn to customer (not admin or author)-->
+        <!--        only show 'new order' btn to customer (not admin or author)-->
         {% if inGroup('admin') %}
+        <!--        do nothing-->
         {% elseif inGroup('author') %}
-        {% else %}
-        <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
+        <!--        do nothing-->
+        {% elseif user %}
+            <a class="nav-link btn btn-danger text-white" href="{{ 'order'|page }}">Place New Order</a>
         {% endif %}
     </div>
 </nav>
