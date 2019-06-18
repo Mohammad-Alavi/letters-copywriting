@@ -109,14 +109,15 @@ class OrderList extends ComponentBase {
      */
     public function getStatusOptions() {
         return [
-            'all'       => 'All',
-            'created'   => 'Waiting for pricing (created)',
-            'priced'    => 'Waiting to be paid (priced)',
-            'paid'      => 'Waiting to be assigned (paid)',
-            'assigned'  => 'Waiting to be done (assigned)',
-            'done'      => 'Waiting to be delivered (done)',
-            'rejected'  => 'Waiting to be edited (rejected)',
-            'delivered' => 'Delivered to the customer (delivered)',
+            'all'             => 'All',
+            'created'         => 'Waiting for pricing (created)',
+            'priced'          => 'Waiting to be paid (priced)',
+            'paid'            => 'Waiting to be assigned (paid)',
+            'assigned'        => 'Waiting to be done (assigned)',
+            'done'            => 'Waiting to be delivered (done)',
+            'rejected'        => 'Waiting to be edited (rejected)',
+            'delivered'       => 'Delivered to the customer (delivered)',
+            'customer_prefer' => 'Customer Prefer [CREATED, PRICED, PAID, ASSIGNED, DONE, REJECTED]',
         ];
     }
 
