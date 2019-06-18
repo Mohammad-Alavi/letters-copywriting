@@ -12,6 +12,10 @@ order_id = "{{ :id }}"
 [authorAssignment]
 admin_id = 0
 order_id = "{{ :id }}"
+
+[commentList]
+user_id = 0
+order_id = "{{ :id }}"
 ==
 {% set user_id = user.id %}
 
@@ -21,6 +25,7 @@ order_id = "{{ :id }}"
 
 {% else %}
 {% partial 'letterwriting/order_details' user_id=user_id %}
+{% partial 'letterwriting/comment_list' user_id=user_id %}
 
 {% if inGroup('admin') %}
 {% partial 'letterwriting/author_assignment' admin_id=user_id %}
