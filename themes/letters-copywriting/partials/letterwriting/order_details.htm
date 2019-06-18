@@ -1,30 +1,82 @@
 {% set order = orderDetails.order %}
+{% set id = user.id %}
 
 <div class="container">
     <div class="row margin-top-75">
         <div class="col-12 text-center">
-            <div class="card" style="width: 18rem;">
-<!--                <img class="card-img-top" src="..." alt="Card image cap">-->
+            <div class="card" style="width: 50rem;">
+                <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
                 <div class="card-body">
                     <h5 class="card-title">{{ order.category }}</h5>
-<!--                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    <!--                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">ID: #{{ order.id }}</li>
+                    <li class="list-group-item">Order ID: {{ order.id }}</li>
                     <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>
                     <li class="list-group-item"><strong>Description: </strong>{{ order.description }}</li>
-                </ul>
-                <div class="card-body">
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div>
+                    <li class="list-group-item"><strong>Price: </strong>{{ order.price }}</li>
 
-            {% if (order.status.label == 'picked') or (order.status.label == 'rejected') %}
-            <form data-request="{{ __SELF__ }}::onDone">
-                <button type="submit">Done</button>
-            </form>
-            {% endif %}
+                    {% if inGroup('author') %}
+                    {% if (order.status == 'assigned') or (order.status == 'rejected') %}
+                    <li class="list-group-item">
+                        <form data-request="onDone">
+                            <button type="submit" class="btn btn-primary">Done</button>
+                        </form>
+                    </li>
+                    {% endif %}
+
+                    {% elseif inGroup('admin') %}
+
+                    {% if (order.status == 'done') %}
+                    <li class="list-group-item">
+                        <form class="d-inline-flex" data-request="onDeliver">
+                            <button type="submit" class="btn btn-primary">Deliver</button>
+                        </form>
+                        <form class="d-inline-flex" data-request="onReject">
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </li>
+                    {% endif %}
+
+                    <li class="list-group-item">
+                        <form data-request="onPriced">
+                            <div class="form-row align-items-center">
+                                <div class="my-1">
+                                    <label class="sr-only" for="inlineFormInputGroupUsername">Price</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <div class="input-group-text">$</div>
+                                        </div>
+                                        <input type="number" name="price" class="form-control"
+                                               id="inlineFormInputGroupUsername"
+                                               placeholder="Price">
+                                    </div>
+                                    <div class="col-auto my-2">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </li>
+                    {% endif %}
+
+                </ul>
+            </div>
         </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12 text-center">
+        <ul id="order-step-progressbar" class="my-5">
+            <li class="{% if order.status == 'created' %}active{% endif %}">created</li>
+            <li class="{% if order.status == 'priced' %}active{% endif %}">priced</li>
+            <li class="{% if order.status == 'paid' %}active{% endif %}">paid</li>
+            <li class="{% if order.status == 'assigned' %}active{% endif %}">assigned</li>
+            <li class="{% if order.status == 'done' %}active{% endif %}">done</li>
+            <li class="{% if order.status == 'rejected' %}active{% endif %}">rejected</li>
+            <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
+        </ul>
     </div>
 </div>
