@@ -1,0 +1,33 @@
+{% set commentList = __SELF__.commentList %}
+
+<h1>All Comments:</h1>
+<ul>
+    {% for comment in commentList %}
+    <li>[{{ comment.id }}] ({{ comment.text }})</li>
+    {% endfor %}
+</ul>
+
+<hr>
+<hr>
+
+<h1>NEW ORDER:</h1>
+
+<form data-request="onCreateComment">
+
+    <label>
+        Comment
+        <input type="text" name="text">
+    </label>
+
+    <button type="submit">CREATE COMMENT</button>
+
+    <ul>
+        {% for error in errors.all() %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% flash success %}
+    <h1><strong>{{ message }}</strong></h1>
+    {% endflash %}
+
+</form>

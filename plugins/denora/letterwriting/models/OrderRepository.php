@@ -68,10 +68,9 @@ class OrderRepository {
         $order->save();
 
         $order->setStatusCreated($customerId);
-        if ($price != null) $order->setStatusPriced($customerId, $price);
+        if ($price != null) $order->setStatusPriced(0, $price);
 
         return $order;
-
     }
 
     /**
@@ -101,6 +100,16 @@ class OrderRepository {
     function assignAuthor(int $orderId, int $authorId) {
         $order = $this->find($orderId);
         $order->author_id = $authorId;
+        $order->save();
+    }
+
+    /**
+     * @param int    $orderId
+     * @param string $text
+     */
+    public function setText(int $orderId, string $text) {
+        $order = $this->find($orderId);
+        $order->text = $text;
         $order->save();
     }
 
