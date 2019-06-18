@@ -22,13 +22,6 @@ status = "all"
 category = "all"
 user_id = 0
 ==
-<?php
-function onStart()
-{
-    $this['user'] = Auth::getUser();
-}
-?>
-==
 {% set id = user.id %}
 
 {% if not user %}
@@ -44,13 +37,11 @@ function onStart()
 
     {% elseif inGroup('author') %}
     {% component 'authorOrderList' user_id=id %}
-
     <!-- if not admin or author then we assume it is a customer by default -->
     {% else %}
     {% component 'customerOrderList' user_id=id %}
 
     {% endif %}
-
 </div>
 
 {% endif %}
