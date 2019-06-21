@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use October\Rain\Support\Facades\Flash;
+use RainLab\User\Facades\Auth;
 
 class NewOrder extends ComponentBase {
 
@@ -46,7 +47,7 @@ class NewOrder extends ComponentBase {
 
     public function onCreateOrder() {
 
-        $userId = Input::get('user_id');
+        $userId = Auth::user()->id;
 
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());

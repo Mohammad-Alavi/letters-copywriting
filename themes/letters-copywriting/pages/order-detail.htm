@@ -5,7 +5,6 @@ description = "Single order detail page"
 is_hidden = 0
 
 [orderDetails]
-user_id = 0
 role = "customer"
 order_id = "{{ :id }}"
 
@@ -14,10 +13,8 @@ admin_id = 0
 order_id = "{{ :id }}"
 
 [commentList]
-user_id = 0
 order_id = 1
 ==
-{% set user_id = user.id %}
 
 {% if not user %}
 
@@ -25,13 +22,13 @@ order_id = 1
 
 {% else %}
 
-{% partial 'letterwriting/order_details' user_id=user_id %}
+{% partial 'letterwriting/order_details' %}
 
 {% if inGroup('admin') %}
 {% partial 'letterwriting/author_assignment' admin_id=user_id %}
 
 {% endif %}
 
-{% partial 'letterwriting/comment_list' user_id=user_id order_id='1' %}
+{% partial 'letterwriting/comment_list' order_id='1' %}
 
 {% endif %}

@@ -8,19 +8,16 @@ is_hidden = 0
 role = "admin"
 status = "all"
 category = "all"
-user_id = 0
 
 [orderList authorOrderList]
 role = "author"
 status = "all"
 category = "all"
-user_id = 0
 
 [orderList customerOrderList]
 role = "customer"
 status = "customer_prefer"
 category = "all"
-user_id = 0
 ==
 {% set id = user.id %}
 
@@ -33,13 +30,13 @@ user_id = 0
 <div class="col-12">
 
     {% if inGroup('admin') %}
-    {% component 'adminOrderList' user_id=id %}
+    {% component 'adminOrderList' %}
 
     {% elseif inGroup('author') %}
-    {% component 'authorOrderList' user_id=id %}
+    {% component 'authorOrderList' %}
     <!-- if not admin or author then we assume it is a customer by default -->
     {% else %}
-    {% component 'customerOrderList' user_id=id %}
+    {% component 'customerOrderList' %}
 
     {% endif %}
 </div>

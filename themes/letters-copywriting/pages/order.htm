@@ -24,7 +24,7 @@ forceSecure = 0
 
 <!-- if not admin or author then we assume it is a customer by default -->
 {% else %}
-{% partial 'letterwriting/new_order' user_id=user.id %}
+{% partial 'letterwriting/new_order' %}
 
 {% endif %}
 

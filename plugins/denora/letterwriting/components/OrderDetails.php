@@ -51,13 +51,6 @@ class OrderDetails extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'user_id'   => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Author, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
-            ],
             'role' => [
                 'title'       => 'User Role',
                 'description' => 'Component items change according to user\'s role',

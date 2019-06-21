@@ -2,6 +2,7 @@
 
 namespace Denora\Letterwriting\Components;
 
+use Backend\Controllers\Auth;
 use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Comment;
@@ -67,7 +68,7 @@ class CommentList extends ComponentBase {
 
     public function onCreateComment() {
 
-        $userId = Input::get('user_id');
+        $userId = Auth::user()->id;
 
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());
