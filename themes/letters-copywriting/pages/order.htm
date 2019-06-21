@@ -5,7 +5,6 @@ description = "Order page"
 is_hidden = 0
 
 [newOrder]
-user_id = 0
 
 [RainLab\User\Components\Account account]
 redirect = "order"
@@ -25,7 +24,7 @@ forceSecure = 0
 
 <!-- if not admin or author then we assume it is a customer by default -->
 {% else %}
-{% partial 'letterwriting/new_order' %}
+{% partial 'letterwriting/new_order' user_id=user.id %}
 
 {% endif %}
 

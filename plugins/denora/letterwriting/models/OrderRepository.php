@@ -27,16 +27,25 @@ class OrderRepository {
     function paginate(string $status, string $category, string $userRole, string $userId, int $perPage = 20) {
         $query = Order::query();
 
-        if ($status != 'all') $query->where(['status' => $status]);
-
-        switch ($category) {
+        switch ($status) {
             case 'all':
                 {
                     break;
                 }
             case 'customer_prefer':
                 {
-                    $query->whereIn('category', [Status::$CREATED, Status::$PRICED, Status::$PAID, Status::$ASSIGNED, Status::$DONE, Status::$REJECTED]);
+                    $query->whereIn('status', [Status::$CREATED, Status::$PRICED, Status::$PAID, Status::$ASSIGNED, Status::$DONE, Status::$REJECTED]);
+                    break;
+                }
+            default:
+                {
+                    $query->where(['status' => $status]);
+                }
+        }
+
+        switch ($category) {
+            case 'all':
+                {
                     break;
                 }
             default:

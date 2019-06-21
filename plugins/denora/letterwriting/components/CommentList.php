@@ -16,11 +16,6 @@ class CommentList extends ComponentBase {
     /**
      * @var int
      */
-    public $userId;
-
-    /**
-     * @var int
-     */
     public $orderId;
 
     /**
@@ -55,13 +50,6 @@ class CommentList extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'user_id'  => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
-            ],
             'order_id' => [
                 'title'             => 'Order ID',
                 'description'       => 'ID of the order',
@@ -73,12 +61,14 @@ class CommentList extends ComponentBase {
     }
 
     public function init() {
-        $this->userId = $this->property('user_id');
         $this->orderId = $this->property('order_id');
         $this->commentList = $this->commentRepository->all($this->orderId);
     }
 
     public function onCreateComment() {
+
+        $userId = Input::get('user_id');
+
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());
         }
@@ -86,7 +76,7 @@ class CommentList extends ComponentBase {
         $text = Input::get('text');
 
         $this->commentRepository->create(
-            $this->userId,
+            $userId,
             $this->orderId,
             $text
         );
