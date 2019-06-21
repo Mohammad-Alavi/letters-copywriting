@@ -10,13 +10,9 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use October\Rain\Support\Facades\Flash;
+use RainLab\User\Facades\Auth;
 
 class NewOrder extends ComponentBase {
-
-    /**
-     * @var int
-     */
-    public $userId;
 
     /**
      * @var Category[]
@@ -45,28 +41,14 @@ class NewOrder extends ComponentBase {
         ];
     }
 
-    /**
-     * Defines the properties used by this class.
-     * This method should be used as an override in the extended class.
-     */
-    public function defineProperties() {
-        return [
-            'user_id' => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
-            ]
-        ];
-    }
-
     public function init() {
-        $this->userId = $this->property('user_id');
         $this->categoryList = Category::all();
     }
 
     public function onCreateOrder() {
+
+        $userId = Auth::user()->id;
+
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());
         }
@@ -79,7 +61,7 @@ class NewOrder extends ComponentBase {
         $price = Category::query()->where('label', '=', $category)->first()->price;
 
         $this->repository->create(
-            $this->userId,
+            $userId,
             $description,
             $language,
             $category,

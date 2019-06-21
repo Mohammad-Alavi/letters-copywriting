@@ -69,7 +69,7 @@ class OrderHistory extends ComponentBase {
     public function getRoleOptions() {
         return [
             'customer' => 'Customer',
-            'writer'   => 'Writer',
+            'author'   => 'Author',
             'admin'    => 'Admin',
         ];
     }

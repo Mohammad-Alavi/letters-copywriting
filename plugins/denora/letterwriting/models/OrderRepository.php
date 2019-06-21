@@ -27,18 +27,44 @@ class OrderRepository {
     function paginate(string $status, string $category, string $userRole, string $userId, int $perPage = 20) {
         $query = Order::query();
 
-        if ($status != 'all') $query->where(['status' => $status]);
-        if ($category != 'all') $query->where(['category' => $category]);
+        switch ($status) {
+            case 'all':
+                {
+                    break;
+                }
+            case 'customer_prefer':
+                {
+                    $query->whereIn('status', [Status::$CREATED, Status::$PRICED, Status::$PAID, Status::$ASSIGNED, Status::$DONE, Status::$REJECTED]);
+                    break;
+                }
+            default:
+                {
+                    $query->where(['status' => $status]);
+                }
+        }
 
-        switch ($userRole){
-            case 'author':{
-                $query->where(['author_id' => $userId]);
-                break;
-            }
-            case 'customer':{
-                $query->where(['customer_id' => $userId]);
-                break;
-            }
+        switch ($category) {
+            case 'all':
+                {
+                    break;
+                }
+            default:
+                {
+                    $query->where(['category' => $category]);
+                }
+        }
+
+        switch ($userRole) {
+            case 'author':
+                {
+                    $query->where(['author_id' => $userId]);
+                    break;
+                }
+            case 'customer':
+                {
+                    $query->where(['customer_id' => $userId]);
+                    break;
+                }
         }
 
         return $query->paginate($perPage);
@@ -68,10 +94,9 @@ class OrderRepository {
         $order->save();
 
         $order->setStatusCreated($customerId);
-        if ($price != null) $order->setStatusPriced($customerId, $price);
+        if ($price != null) $order->setStatusPriced(0, $price);
 
         return $order;
-
     }
 
     /**

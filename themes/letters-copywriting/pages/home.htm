@@ -3,36 +3,12 @@ url = "/"
 layout = "default"
 is_hidden = 0
 
-[newOrder]
-user_id = 2
-
-[orderDetails]
-user_id = 1
-role = "customer"
-order_id = 5
-
-[orderHistory]
-role = "customer"
-order_id = 5
-
-[authorAssignment]
-admin_id = 10
-order_id = 5
 ==
 <div class="container">
     <div class="row">
         <div class="col-12 text-center">
             {% content "welcome.htm" %}
             <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>
-            <hr>
-            {% component 'newOrder' %}
-            <hr>
-            {% component 'orderDetails' %}
-            <hr>
-            {% component 'orderHistory' %}
-            <hr>
-            <hr>
-            {% component 'authorAssignment' %}
         </div>
     </div>
 </div>
