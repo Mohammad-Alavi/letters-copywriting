@@ -2,7 +2,6 @@
 
 namespace Denora\Letterwriting\Components;
 
-use Backend\Controllers\Auth;
 use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Comment;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use October\Rain\Support\Facades\Flash;
+use RainLab\User\Facades\Auth;
 
 class CommentList extends ComponentBase {
 
