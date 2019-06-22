@@ -10,10 +10,10 @@
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><strong>Order ID: </strong>{{ order.id }}</li>
-<!--                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>-->
+                <!--                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>-->
                 <li class="list-group-item"><strong>Description: </strong>{{ order.description }}</li>
 
-<!--                if normal user and delivered-->
+                <!--                if normal user and delivered-->
                 {% if (order.status == 'delivered') and not (inGroup('author')) and not (inGroup('admin'))%}
                 <li class="list-group-item"><strong>Text: </strong>{{ order.text }}</li>
                 {% endif %}
@@ -35,10 +35,10 @@
                             <textarea class="form-control" name="text" id="inlineFormInputGroupText"
                                       placeholder="Text..." aria-label="Text..." required></textarea>
                         </div>
-                            <button type="submit" class="btn btn-primary m-1">Done</button>
-                            <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-                                  title="This section is only viewable by Authors"><i class="fa fa-info-circle"
-                                                                                     aria-hidden="true"></i></span>
+                        <button type="submit" class="btn btn-primary m-1">Done</button>
+                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                              title="This section is only viewable by Authors"><i class="fa fa-info-circle"
+                                                                                  aria-hidden="true"></i></span>
                     </form>
                 </li>
                 {% endif %}
@@ -56,6 +56,7 @@
                 </li>
                 {% endif %}
 
+                {% if (order.price == null) %}
                 <li class="list-group-item">
                     <form data-request="onPriced">
                         <div class="form-row align-items-center">
@@ -78,6 +79,7 @@
                         </div>
                     </form>
                 </li>
+                {% endif %}
                 {% endif %}
 
             </ul>
@@ -103,7 +105,9 @@
             <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
             {% endif %}
             {% else %}
-            <li class="{% if (order.status == 'assigned') or (order.status == 'done') or (order.status == 'rejected') %}active{% endif %}">in progress</li>
+            <li class="{% if (order.status == 'assigned') or (order.status == 'done') or (order.status == 'rejected') %}active{% endif %}">
+                in progress
+            </li>
             <li class="{% if order.status == 'delivered' %}active{% endif %}">delivered</li>
             {% endif %}
         </ul>
