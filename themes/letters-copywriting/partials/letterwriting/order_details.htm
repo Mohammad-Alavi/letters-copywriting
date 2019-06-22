@@ -12,6 +12,7 @@
                 <li class="list-group-item"><strong>Order ID: </strong>{{ order.id }}</li>
                 <!--                <li class="list-group-item"><strong>Status: </strong>{{ order.status }}</li>-->
                 <li class="list-group-item"><strong>Description: </strong>{{ order.description }}</li>
+                <li class="list-group-item"><strong>Language: </strong>{{ order.language }}</li>
 
                 <!--                if normal user and delivered-->
                 {% if (order.status == 'delivered') and not (inGroup('author')) and not (inGroup('admin'))%}
@@ -23,7 +24,7 @@
                 {% endif %}
 
                 {% if not inGroup('author') %}
-                <li class="list-group-item"><strong>Price: </strong>${{ order.price }}</li>
+                <li class="list-group-item"><strong>Price: </strong>{% if order.price != null %}${% endif %}{{ order.price }}</li>
                 {% endif %}
 
                 {% if inGroup('author') %}
