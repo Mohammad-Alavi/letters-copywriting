@@ -19,8 +19,6 @@ role = "customer"
 status = "customer_prefer"
 category = "all"
 ==
-{% set id = user.id %}
-
 {% if not user %}
 
 {% partial 'account::login' %}

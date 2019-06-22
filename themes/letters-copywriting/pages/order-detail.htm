@@ -25,10 +25,10 @@ order_id = 1
 {% partial 'letterwriting/order_details' %}
 
 {% if inGroup('admin') %}
-{% partial 'letterwriting/author_assignment' admin_id=user_id %}
+{% partial 'letterwriting/author_assignment' %}
 
 {% endif %}
 
-{% partial 'letterwriting/comment_list' order_id='1' %}
+{% partial 'letterwriting/comment_list' %}
 
 {% endif %}
