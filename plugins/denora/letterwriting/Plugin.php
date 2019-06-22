@@ -26,6 +26,16 @@ class Plugin extends PluginBase {
      * @return array
      */
     public function registerSettings() {
-
+        return [
+            'rush' => [
+                'label'       => 'Rush',
+                'description' => 'Change how rush system works.',
+                'category'    => 'Letter Writing',
+                'icon'        => 'icon-car',
+                'class'       => 'Denora\Letterwriting\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'rush order'
+            ]
+        ];
     }
 }
