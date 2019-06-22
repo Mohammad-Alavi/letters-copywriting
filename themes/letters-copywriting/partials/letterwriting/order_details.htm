@@ -23,7 +23,7 @@
                 {% endif %}
 
                 {% if not inGroup('author') %}
-                <li class="list-group-item"><strong>Price: </strong>{{ order.price }}</li>
+                <li class="list-group-item"><strong>Price: </strong>${{ order.price }}</li>
                 {% endif %}
 
                 {% if inGroup('author') %}
