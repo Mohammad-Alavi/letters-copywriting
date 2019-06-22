@@ -54,13 +54,12 @@ class Order extends Model {
         'comments' => 'Denora\Letterwriting\Models\Comment',
     ];
 
-    /**
-     * Returns `customer` attribute
-     *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
-     */
     public function getCustomerAttribute() {
         return User::query()->where('id', $this->customer_id)->first();
+    }
+
+    public function getAuthorAttribute() {
+        return User::query()->where('id', $this->author_id)->first();
     }
 
     /**
