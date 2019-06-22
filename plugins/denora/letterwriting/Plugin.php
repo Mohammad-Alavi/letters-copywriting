@@ -1,5 +1,6 @@
 <?php namespace Denora\Letterwriting;
 
+use Denora\Letterwriting\Models\Settings;
 use System\Classes\PluginBase;
 
 class Plugin extends PluginBase {
@@ -35,6 +36,16 @@ class Plugin extends PluginBase {
                 'class'       => 'Denora\Letterwriting\Models\Settings',
                 'order'       => 500,
                 'keywords'    => 'rush order'
+            ]
+        ];
+    }
+
+    public function registerMarkupTags() {
+        return [
+            'functions' => [
+                'getRushPercentage' => function () {
+                    return Settings::instance()->rush_percentage;
+                }
             ]
         ];
     }
