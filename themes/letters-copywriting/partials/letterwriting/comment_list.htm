@@ -19,63 +19,55 @@
                                     <textarea class="form-control" name="text" id="addComment"
                                               rows="5"></textarea>
                 </div>
+                <!--                <div class="form-group">-->
+                <!--                    <label for="uploadMedia" class="col-sm-2 control-label">Upload media-->
+                <!--                        (Placeholder)</label>-->
+                <!--                    <div class="col-sm-10">-->
+                <!--                        <div class="input-group">-->
+                <!--                            <div class="input-group-addon">http://</div>-->
+                <!--                            <input type="text" class="form-control" name="uploadMedia" id="uploadMedia">-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <div class="form-group">
-                    <label for="uploadMedia" class="col-sm-2 control-label">Upload media
-                        (Placeholder)</label>
-                    <div class="col-sm-10">
-                        <div class="input-group">
-                            <div class="input-group-addon">http://</div>
-                            <input type="text" class="form-control" name="uploadMedia" id="uploadMedia">
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button class="btn btn-success text-uppercase" type="submit"
-                                id="submitComment"><i class="fas fa-paper-plane"></i> Submit
-                            comment
+                    <div class="col-sm-12 text-right">
+                        <button class="btn btn-outline-success text-uppercase" type="submit"
+                                id="submitComment"><i class="fas fa-paper-plane"></i> Send
                         </button>
                     </div>
                 </div>
 
-                <ul>
-                    {% for error in errors.all() %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-                {% flash success %}
-                <h1><strong>{{ message }}</strong></h1>
-                {% endflash %}
+                {% for error in errors.all() %}
+                <div class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+                {% endfor %}
 
+                {% flash success %}
+                <!--                <div class="alert alert-success mt-3">{{ message }}</div>-->
+                {% endflash %}
             </form>
         </div>
 
         <hr>
 
-<ul class="media-list m-2">
+        <div class="media-list m-2">
 
-    {% for comment in commentList %}
+            {% for comment in commentList %}
 
-    <li class="media">
-        <div class="media-body">
-            <div class="well well-lg">
-                <h4 class="media-heading text-uppercase reviews">{{ comment.order.customer.name }}</h4>
-                <ul class="media-date text-uppercase reviews list-inline">
-                    <li>{{ comment.created_at }}</li>
-                </ul>
-                <p class="media-comment">
-                    {{ comment.text }}
-                </p>
+            <div class="media">
+                <div class="media-body">
+                    <div class="single-comment">
+                        <span class="sub-text">{{ comment.created_at | time_diff}}</span>
+                        <h4 class="comment-customer-name">{{ comment.order.customer.name }}</h4>
+                        <div>
+                            <p class="media-comment">{{ comment.text }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            {% endfor %}
         </div>
-    </li>
-
-    {% endfor %}
-</ul>
-
-<!--
-
-
-
     </div>
-</div>-->
+</div>
