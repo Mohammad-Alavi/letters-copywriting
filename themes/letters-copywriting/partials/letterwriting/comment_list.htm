@@ -59,7 +59,7 @@
                 <div class="media-body">
                     <div class="single-comment">
                         <span class="sub-text">{{ comment.created_at | time_diff}}</span>
-                        <h4 class="comment-customer-name d-inline-flex">{{ comment.order.customer.name }}</h4>
+                        <h4 class="comment-customer-name d-inline-flex">{{ comment.sender.name }}</h4>
 
                         {% if isAdmin(comment.sender_id) %}
                         <span class="d-inline-flex" tabindex="0" data-toggle="tooltip"
