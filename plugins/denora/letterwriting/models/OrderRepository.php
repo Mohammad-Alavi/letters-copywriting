@@ -115,6 +115,12 @@ class OrderRepository {
      */
     function changePrice(int $orderId, $price) {
         $order = $this->find($orderId);
+
+        if ($order->is_rush) {
+            $rushPercentage = Settings::instance()->rush_percentage;
+            $price = $price + ($price * ($rushPercentage) / 100);
+        }
+
         $order->price = $price;
         $order->save();
     }
