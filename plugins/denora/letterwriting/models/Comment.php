@@ -1,6 +1,7 @@
 <?php namespace Denora\Letterwriting\Models;
 
 use Model;
+use RainLab\User\Models\User;
 
 /**
  * Model
@@ -24,4 +25,8 @@ class Comment extends Model
     public $belongsTo = [
         'order' => 'Denora\Letterwriting\Models\Order'
     ];
+    
+    public function getSenderAttribute() {
+        return User::query()->where('id', $this->sender_id)->first();
+    }
 }
