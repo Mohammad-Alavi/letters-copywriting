@@ -1,7 +1,3 @@
-#comment-in-detail-page {
-  margin-bottom: 50px;
-}
-
 .logout {
   position: absolute;
   top: -3px;
@@ -21,10 +17,6 @@
 
 .media .media-object {
   max-width: 120px;
-}
-
-.media-body {
-  position: relative;
 }
 
 .media-date {
@@ -92,4 +84,20 @@ input[type="file"] {
 
 .custom-input-file:hover .uploadPhoto {
   display: block;
+}
+
+.single-comment {
+  position: relative;
+
+  .sub-text {
+    color: #aaa;
+    font-size: 11px;
+    position: absolute;
+    left: -90px;
+    top: 5px;
+  }
+
+  .comment-customer-name {
+    margin: 0;
+  }
 }

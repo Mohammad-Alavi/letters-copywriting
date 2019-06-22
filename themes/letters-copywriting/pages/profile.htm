@@ -11,8 +11,6 @@ redirect = "profile"
 paramCode = "code"
 forceSecure = 0
 ==
-{% set id = user.id %}
-
 {% if not user %}
 
 {% partial 'account::login' %}

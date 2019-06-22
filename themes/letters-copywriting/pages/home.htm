@@ -5,10 +5,17 @@ is_hidden = 0
 
 ==
 <div class="container">
-    <div class="row">
+    <div class="row" id="home-page-row">
         <div class="col-12 text-center">
-            {% content "welcome.htm" %}
-            <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>
+            <h1>Online Proofreading and Copy-editing Service</h1>
+            <p class="margin-top-50">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque deserunt, dolorem dolores eaque
+                inventore natus neque. Accusantium adipisci atque delectus, est illum iusto natus nihil ratione
+                reprehenderit, vel voluptas voluptatum? Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Assumenda dolore eligendi magni natus nesciunt quam sequi sit temporibus unde ut? Eius enim expedita
+                inventore porro tempora.</p>
+            <!--            {% content "welcome.htm" %}-->
+            <!--            <h2>We know that you are{% if not user %} <strong style="color: red">not</strong>{% endif %} <strong style="color: red">logged in</strong> now.</h2>-->
+            <a href="{{ 'order'|page }}" class="margin-top-50 btn btn-outline-danger">Get Started</a>
         </div>
     </div>
 </div>
