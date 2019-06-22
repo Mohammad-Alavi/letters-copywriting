@@ -1,0 +1,7 @@
+fields:
+    rush_percentage:
+        label: 'Rush Percentage'
+        span: auto
+        default: '0'
+        required: 1
+        type: number

@@ -1,0 +1,11 @@
+name: rush
+modelClass: Denora\Letterwriting\Models\Settings
+form: $/denora/letterwriting/models/settings/fields.yaml
+defaultRedirect: denora/letterwriting/settings
+create:
+    redirect: 'denora/letterwriting/settings/update/:id'
+    redirectClose: denora/letterwriting/settings
+update:
+    redirect: denora/letterwriting/settings
+    redirectClose: denora/letterwriting/settings
+preview: {  }
