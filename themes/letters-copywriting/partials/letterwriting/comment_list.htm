@@ -49,7 +49,7 @@
             </form>
         </div>
 
-        <hr>
+        {% if commentList[0] %}
 
         <div class="media-list m-2">
 
@@ -69,5 +69,7 @@
 
             {% endfor %}
         </div>
+
+        {% endif %}
     </div>
 </div>
