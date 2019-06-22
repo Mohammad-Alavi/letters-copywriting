@@ -1,4 +1,4 @@
-{% set commentList = CommentList.commentList %}
+{% set commentList = commentList.commentList %}
 
 <hr>
 
@@ -52,46 +52,30 @@
 
         <hr>
 
-<!--        <span>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
-<!--        <div>User id: {{ user_id }}</div>-->
-<!--        <div>Order id: {{ order_id }}</div>-->
-<!--        <div>{{commentList}}</div>-->
-<!--        <ul>-->
-<!--            {% for comment in commentList %}-->
-<!--            <li>[{{ comment.id }}] ({{ comment.text }})</li>-->
-<!--            {% endfor %}-->
-<!--        </ul>-->
-<!--        <span>-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+<ul class="media-list m-2">
 
-            <ul class="media-list m-2">
-                <li class="media">
-                    <div class="media-body">
-                        <div class="well well-lg">
-                            <h4 class="media-heading text-uppercase reviews">Mohammad Alavi</h4>
-                            <ul class="media-date text-uppercase reviews list-inline">
-                                <li>19/6/2019</li>
-                            </ul>
-                            <p class="media-comment">
-                                This is a test comment.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="media-body">
-                        <div class="well well-lg">
-                            <h4 class="media-heading text-uppercase reviews">Moslem Deris</h4>
-                            <ul class="media-date text-uppercase reviews list-inline">
-                                <li>18/6/2019</li>
-                            </ul>
-                            <p class="media-comment">
-                                This is another test comment.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+    {% for comment in commentList %}
+
+    <li class="media">
+        <div class="media-body">
+            <div class="well well-lg">
+                <h4 class="media-heading text-uppercase reviews">{{ comment.order.customer.name }}</h4>
+                <ul class="media-date text-uppercase reviews list-inline">
+                    <li>{{ comment.created_at }}</li>
+                </ul>
+                <p class="media-comment">
+                    {{ comment.text }}
+                </p>
+            </div>
+        </div>
+    </li>
+
+    {% endfor %}
+</ul>
+
+<!--
+
 
 
     </div>
-</div>
+</div>-->
