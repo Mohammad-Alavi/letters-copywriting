@@ -38,13 +38,15 @@
                     </div>
                 </div>
 
-                <ul>
-                    {% for error in errors.all() %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
+                {% for error in errors.all() %}
+                <div class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
                 {% flash success %}
-                <h1><strong>{{ message }}</strong></h1>
+                <div class="alert alert-success mt-3">{{ message }}</div>
+                <div class="alert alert-success mt-3">You can check your Order progress <a href="/my-orders">here</a></div>
                 {% endflash %}
 
             </form>
