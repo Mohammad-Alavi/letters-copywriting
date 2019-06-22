@@ -1,40 +1,54 @@
-{% if user %}
+<div class="row sign-in">
+    <div class="col-sm-5 col-lg-3 offset-lg-2">
+        <p><strong>Already a member? Then login!</strong></p>
 
-<div class="message-box">You are already logged in.</div>
+        <form id="signupForm"
+              data-request-validate
+              data-request-flash
+              data-request="onSignin">
+            <div class="form-group">
+                <label for="userSigninLogin">{{ loginAttributeLabel }}</label>
+                <input
+                        name="login"
+                        type="text"
+                        class="form-control"
+                        id="userSigninLogin"
+                        placeholder="Enter your {{ loginAttributeLabel|lower }}"/>
+            </div>
 
-{% else %}
-<p><strong>Already a member? Then login!</strong></p>
+            <div class="form-group">
+                <label for="userSigninPassword">Password</label>
+                <input
+                        name="password"
+                        type="password"
+                        class="form-control"
+                        id="userSigninPassword"
+                        placeholder="Enter your password"/>
+            </div>
 
-{% endif %}
+            <button data-attach-loading type="submit" class="btn btn-success" id="submitButton">Sign in</button>
+            <a class="float-right" href="{{ 'forgot-password' }}">Forgot password?</a>
 
-<form id="signupForm"
-        data-request-validate
-        data-request-flash
-        data-request="onSignin">
-    <div class="form-group">
-        <label for="userSigninLogin">{{ loginAttributeLabel }}</label>
-        <input
-                name="login"
-                type="text"
-                class="form-control"
-                id="userSigninLogin"
-                placeholder="Enter your {{ loginAttributeLabel|lower }}" />
+            <div class="alert alert-danger login-update-error" data-validate-error>
+                <div data-message></div>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label for="userSigninPassword">Password</label>
-        <input
-                name="password"
-                type="password"
-                class="form-control"
-                id="userSigninPassword"
-                placeholder="Enter your password" />
+    <p class="or col-sm-2 text-center">or</p>
+    <div class="social-login col-sm-5 col-lg-3">
+        <!--    social sign in-->
+        {% for name, link in social_login_links %}
+        <a class="btn btn-danger btn-social btn-google" href="{{ link }}"><span class="fab fa-google"></span> Sign
+            in with {{ name }}</a>
+        {% endfor %}
     </div>
+</div>
 
-    <button data-attach-loading type="submit" class="btn btn-success" id="submitButton">Sign in</button>
-    <a class="float-right" href="{{ 'forgot-password' }}">Forgot password?</a>
-
-    <div class="alert alert-danger login-update-error" data-validate-error>
-        <div data-message></div>
+<div class="row">
+    <div class="col-12 text-center register">
+        <p>
+            Don't have an account yet?
+        </p>
+        <div><a href="register" class="btn btn-info">Join Now</a></div>
     </div>
-</form>
+</div>

@@ -1,0 +1,34 @@
+title = "Order Detail"
+url = "/my-orders/:id"
+layout = "default"
+description = "Single order detail page"
+is_hidden = 0
+
+[orderDetails]
+role = "customer"
+order_id = "{{ :id }}"
+
+[authorAssignment]
+admin_id = 0
+order_id = "{{ :id }}"
+
+[commentList]
+order_id = 1
+==
+
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+
+{% partial 'letterwriting/order_details' %}
+
+{% if inGroup('admin') %}
+{% partial 'letterwriting/author_assignment' admin_id=user_id %}
+
+{% endif %}
+
+{% partial 'letterwriting/comment_list' order_id='1' %}
+
+{% endif %}

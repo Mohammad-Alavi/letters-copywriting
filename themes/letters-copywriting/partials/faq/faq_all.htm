@@ -1,0 +1,29 @@
+{% set faqs = FaqAll.faqs %}
+
+<div class="row margin-top-50">
+    <div class="col-12">
+        <h1 id="faq-header">Can't find your answer here? <a href="{{ 'contact-us'|page }}">Contact Us</a></h1>
+        <div id="accordion">
+            {% for faq in faqs %}
+            <div class="card">
+                <div class="card-header" id="question_{{ faq.id }}" data-toggle="collapse" data-target="#collapse_question_{{ faq.id }}" aria-expanded="true"
+                     aria-controls="collapse_question_{{ faq.id }}">
+                    <h5 class="mb-0">
+                        {{ faq.question }}
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse_question_{{ faq.id }}" aria-expanded="true"
+                                aria-controls="collapse_question_{{ faq.id }}">
+                        </button>
+                    </h5>
+                </div>
+
+                <div id="collapse_question_{{ faq.id }}" class="collapse" aria-labelledby="question_{{ faq.id }}" data-parent="#accordion">
+                    <div class="card-body">
+                        <!--                <span>{{ faq.created_at|date("d-m-Y")}}</span>-->
+                        <span>{{ faq.answer|md }} </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

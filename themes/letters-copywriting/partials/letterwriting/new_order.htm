@@ -1,0 +1,55 @@
+{% set categoryList = newOrder.categoryList %}
+
+<div class="container">
+    <div class="row margin-top-75">
+        <div class="col-sm-5 offset-lg-2 text-left">
+            <form data-request="onCreateOrder">
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" name="category">
+                        {% for category in categoryList %}
+                        <option value="{{ category.label }}">{{ category.label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control"  type="text" name="description" id="addComment"
+                              rows="5"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input class="form-check form-check-inline" type="checkbox" name="is_rush">
+                    <label class="form-check-label">Rush</label>
+                    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                          title="Check this if your work is urgent. Additional costs may apply."><i
+                            class="fa fa-info-circle"
+                            aria-hidden="true"></i></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Language</label>
+                    <select class="form-control" name="language">
+                        <option value="en" selected>English</option>
+                        <option value="fa">Farsi</option>
+                        <option value="ar">Arabic</option>
+                    </select>
+                </div>
+
+                <button ata-attach-loading class="btn btn-primary" type="submit">Create</button>
+
+                <ul>
+                    {% for error in errors.all() %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% flash success %}
+                <div>{{ message }}</div>
+                <div>You can check your Order progress here</div>
+                {% endflash %}
+            </form>
+        </div>
+    </div>
+</div>

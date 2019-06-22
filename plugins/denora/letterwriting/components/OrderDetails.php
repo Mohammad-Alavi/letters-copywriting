@@ -8,6 +8,7 @@ use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
+use RainLab\User\Facades\Auth;
 
 class OrderDetails extends ComponentBase {
 
@@ -15,16 +16,6 @@ class OrderDetails extends ComponentBase {
      * @var Order
      */
     public $order;
-
-    /**
-     * @var int
-     */
-    public $userId;
-
-    /**
-     * @var String
-     */
-    public $userRole;
 
     /**
      * @var OrderRepository
@@ -60,13 +51,6 @@ class OrderDetails extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'user_id'   => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
-            ],
             'role' => [
                 'title'       => 'User Role',
                 'description' => 'Component items change according to user\'s role',
@@ -99,9 +83,6 @@ class OrderDetails extends ComponentBase {
     public function init() {
         parent::init();
 
-        $this->userId = $this->property('user_id');
-        $this->userRole = $this->property('role');
-
         $orderId = $this->property('order_id');
         $this->order = $this->getOrder($orderId);
     }
@@ -123,7 +104,7 @@ class OrderDetails extends ComponentBase {
     public function onDone() {
         //  TODO: Check if the user is an author
         $text = Input::get('text');
-        $this->order->setStatusDone($this->userId, $text);
+        $this->order->setStatusDone(Auth::user()->id, $text);
 
         return Redirect::back();
     }
@@ -135,7 +116,7 @@ class OrderDetails extends ComponentBase {
      */
     public function onDeliver() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusDelivered($this->userId);
+        $this->order->setStatusDelivered(Auth::user()->id);
 
         return Redirect::back();
     }
@@ -147,7 +128,7 @@ class OrderDetails extends ComponentBase {
      */
     public function onReject() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusRejected($this->userId);
+        $this->order->setStatusRejected(Auth::user()->id);
 
         return Redirect::back();
     }
@@ -160,7 +141,7 @@ class OrderDetails extends ComponentBase {
     public function onPriced() {
         //  TODO: Check if the user is an admin
         $price = Input::get('price');
-        $this->order->setStatusPriced($this->userId, $price);
+        $this->order->setStatusPriced(Auth::user()->id, $price);
 
         return Redirect::back();
     }

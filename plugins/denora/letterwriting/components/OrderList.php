@@ -7,6 +7,7 @@ use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Category;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
+use RainLab\User\Facades\Auth;
 
 class OrderList extends ComponentBase {
 
@@ -30,10 +31,6 @@ class OrderList extends ComponentBase {
      */
     public $userRole;
 
-    /**
-     * @var int
-     */
-    public $userId;
     /**
      * @var OrderRepository
      */
@@ -78,13 +75,6 @@ class OrderList extends ComponentBase {
                 'description' => 'Category of orders',
                 'type'        => 'dropdown',
                 'default'     => 'all',
-            ],
-            'user_id'  => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
             ]
         ];
     }
@@ -109,14 +99,15 @@ class OrderList extends ComponentBase {
      */
     public function getStatusOptions() {
         return [
-            'all'       => 'All',
-            'created'   => 'Waiting for pricing (created)',
-            'priced'    => 'Waiting to be paid (priced)',
-            'paid'      => 'Waiting to be assigned (paid)',
-            'assigned'  => 'Waiting to be done (assigned)',
-            'done'      => 'Waiting to be delivered (done)',
-            'rejected'  => 'Waiting to be edited (rejected)',
-            'delivered' => 'Delivered to the customer (delivered)',
+            'all'             => 'All',
+            'created'         => 'Waiting for pricing (created)',
+            'priced'          => 'Waiting to be paid (priced)',
+            'paid'            => 'Waiting to be assigned (paid)',
+            'assigned'        => 'Waiting to be done (assigned)',
+            'done'            => 'Waiting to be delivered (done)',
+            'rejected'        => 'Waiting to be edited (rejected)',
+            'delivered'       => 'Delivered to the customer (delivered)',
+            'customer_prefer' => 'Customer Prefer [CREATED, PRICED, PAID, ASSIGNED, DONE, REJECTED]',
         ];
     }
 
@@ -135,15 +126,15 @@ class OrderList extends ComponentBase {
         return $categoryArray;
     }
 
-    public function init() {
-        parent::init();
+    public function onRender() {
+        parent::onRender();
 
+        $userId = Auth::user()->id;
         $this->userRole = $this->property('role');
-        $this->userId = $this->property('user_id');
         $this->orderStatus = $this->property('status');
         $this->orderCategory = $this->property('category');
 
-        $this->orderList = $this->repository->paginate($this->orderStatus, $this->orderCategory, $this->userRole, $this->userId);
+        $this->orderList = $this->repository->paginate($this->orderStatus, $this->orderCategory, $this->userRole, $userId);
     }
 
 }
