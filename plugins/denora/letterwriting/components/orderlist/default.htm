@@ -16,6 +16,7 @@
                     <th scope="col">Description</th>
                     <th scope="col">Status</th>
                     <th scope="col">Is Rush</th>
+                    <th scope="col">Language</th>
                     <th scope="col">Creation Date</th>
                     <th scope="col">Detail</th>
                 </tr>
@@ -25,7 +26,7 @@
                 <tr>
                     <td data-id='{{order.id}}'>{{ order.id }}</td>
                     <td>{{ order.category }}</td>
-                    <td>{{ order.description }}</td>
+                    <td>{{ order.description | truncate(25)}} </td>
 
                     <td>
                         {% if inGroup('author') or inGroup('admin') %}
@@ -45,6 +46,7 @@
                     </td>
 
                     <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
+                    <td>{{ order.language }}</td>
                     <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
                     <td class="text-center">
                         <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">View
