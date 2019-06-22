@@ -69,8 +69,8 @@ class Plugin extends PluginBase
         $user = User::find($userId);
         $groups = $user->groups;
         foreach ($groups as $group)
-            if ($group->code == $userRole) return 'true';
+            if ($group->code == $userRole) return true;
 
-        return 'false';
+        return false;
     }
 }
