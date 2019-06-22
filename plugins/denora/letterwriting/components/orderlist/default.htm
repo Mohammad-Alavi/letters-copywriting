@@ -3,7 +3,8 @@
 <div class="container">
     <div class="row margin-top-75">
         <div class="col-12 text-center">
-            <p class="float-left text-left">Type something in the input field to search the table for Category, Description,
+            <p class="float-left text-left">Type something in the input field to search the table for Category,
+                Description,
                 Status, etc...</p>
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
@@ -25,7 +26,24 @@
                     <td data-id='{{order.id}}'>{{ order.id }}</td>
                     <td>{{ order.category }}</td>
                     <td>{{ order.description }}</td>
-                    <td>{{ order.status }}</td>
+
+                    <td>
+                        {% if inGroup('author') or inGroup('admin') %}
+                        {{ order.status }}
+
+                        {% else %}
+
+                        {% if (order.status == 'assigned') or
+                        (order.status == 'done') or
+                        (order.status == 'rejected') %}
+                        in progress
+                        {% else %}
+                        {{ order.status }}
+                        {% endif %}
+
+                        {% endif %}
+                    </td>
+
                     <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
                     <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
                     <td class="text-center">
