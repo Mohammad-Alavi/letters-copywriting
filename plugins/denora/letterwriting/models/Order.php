@@ -1,6 +1,7 @@
 <?php namespace Denora\Letterwriting\Models;
 
 use Model;
+use RainLab\User\Models\User;
 
 class Order extends Model {
     use \October\Rain\Database\Traits\Validation;
@@ -52,6 +53,15 @@ class Order extends Model {
         'statuses' => 'Denora\Letterwriting\Models\Status',
         'comments' => 'Denora\Letterwriting\Models\Comment',
     ];
+
+    /**
+     * Returns `customer` attribute
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
+    public function getCustomerAttribute() {
+        return User::query()->where('id', $this->customer_id)->first();
+    }
 
     /**
      * @param int    $doerId

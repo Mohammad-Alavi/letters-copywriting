@@ -66,9 +66,12 @@ class CommentList extends ComponentBase {
         $this->commentList = $this->commentRepository->all($this->orderId);
     }
 
+    /**
+     * @return mixed
+     */
     public function onCreateComment() {
 
-        $userId = Auth::user()->id;
+        $userId = Auth::getUser()->id;
 
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());
