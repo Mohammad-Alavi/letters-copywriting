@@ -9,7 +9,7 @@
                     <label>Category</label>
                     <select class="form-control" name="category">
                         {% for category in categoryList %}
-                        <option value="{{ category.label }}">{{ category.label }}</option>
+                        <option value="{{ category.label }}">{{ category.label }} {% if category.price %} ({{category.price}}$) {% else %} (variable price) {% endif %}</option>
                         {% endfor %}
                     </select>
                 </div>
