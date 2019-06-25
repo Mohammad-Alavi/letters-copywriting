@@ -146,7 +146,7 @@ class Order extends Model {
     private function notifyStatusChanged() {
         $vars = ['name' => $this->customer->name, 'status' => $this->status, 'order' => $this];
 
-        Mail::queue('denora.letterwriting::mail.message', $vars, function ($message) {
+        Mail::send('denora.letterwriting::mail.message', $vars, function ($message) {
 
             $message->to($this->customer->email, 'no reply');
             $message->subject('This is Test!!!');
