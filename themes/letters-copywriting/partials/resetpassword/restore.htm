@@ -1,11 +1,12 @@
+==
 <div class="col-sm-12 col-md-6 offset-md-2 col-lg-4 offset-lg-2">
     <p class="lead">
         <strong>Lost your password?</strong> No problem! Enter your email address to verify your account.
     </p>
 
     <form
-            data-request="{{ __SELF__ }}::onRestorePassword"
-            data-request-update="'{{ __SELF__ }}::reset': '#partialUserResetForm'">
+            data-request="onRestorePassword"
+            data-request-update="'reset': '#partialUserResetForm'">
         <div class="form-group">
             <label for="userRestoreEmail">Email</label>
             <input name="email" type="email" class="form-control" id="userRestoreEmail"

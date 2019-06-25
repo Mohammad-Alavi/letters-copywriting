@@ -148,8 +148,8 @@ class Order extends Model {
 
         Mail::send('denora.letterwriting::mail.message', $vars, function ($message) {
 
-            $message->to($this->customer->email, 'no reply');
-            $message->subject('This is Test!!!');
+            $message->to($this->customer->email);
+            $message->subject('Order Status Report - Letters Copywriting');
 
         });
     }
