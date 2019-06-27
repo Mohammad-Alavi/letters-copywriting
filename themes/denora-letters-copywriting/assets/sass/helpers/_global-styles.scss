@@ -5,3 +5,13 @@
 .margin-top-75 {
   margin-top: 75px;
 }
+
+.align-xy-center {
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center;
+}
+
+.or {
+  font-size: 2rem;
+}
