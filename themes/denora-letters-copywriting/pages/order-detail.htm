@@ -25,13 +25,17 @@ forceSecure = 0
 
 {% else %}
 
-{% partial 'letterwriting/order_details' %}
+<div class="gtco-section">
+    <div class="gtco-container">
+        {% partial 'letterwriting/order_detail' %}
 
-{% if inGroup('admin') %}
-{% partial 'letterwriting/author_assignment' %}
+        {% if inGroup('admin') %}
+        {% partial 'letterwriting/author_assignment' %}
 
-{% endif %}
+        {% endif %}
 
-{% partial 'letterwriting/comment_list' %}
+        {% partial 'letterwriting/comment_list' %}
+    </div>
+</div>
 
 {% endif %}
