@@ -1,7 +1,7 @@
 {% set order = orderDetails.order %}
 
 <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-xs-12 animate-box text-center">
         <div class="card margin-top-50" id="order-detail-card">
             <!--                <img class="card-img-top" src="..." alt="Card image cap">-->
             <div class="card-body">
@@ -24,7 +24,9 @@
                 {% endif %}
 
                 {% if not inGroup('author') %}
-                <li class="list-group-item"><strong>Price: </strong>{% if order.price != null %}${% endif %}{{ order.price }}</li>
+                <li class="list-group-item"><strong>Price: </strong>{% if order.price != null %}${% endif %}{{
+                    order.price }}
+                </li>
                 {% endif %}
 
                 {% if inGroup('author') %}
@@ -87,10 +89,8 @@
         </div>
     </div>
 </div>
-
-
 <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-xs-12 animate-box text-center">
         <ul id="order-step-progressbar" class="my-5">
             <li class="{% if order.status == 'created' %}active{% endif %}">created</li>
             <li class="{% if order.status == 'priced' %}active{% endif %}">priced</li>
