@@ -1,4 +1,4 @@
-<div class="col-xs-4 col-sm-6 text-right menu-1">
+<div class="col-xs-4 col-sm-9 col-md-8 text-right menu-1">
     <ul>
         <li class="{% if this.page.id == 'home' %}active{% endif %}"><a href="{{ 'home'|page }}">Home</a></li>
         <li class="{% if this.page.id == 'about' %}active{% endif %}"><a href="{{ 'about'|page }}">About</a></li>
@@ -14,5 +14,23 @@
         <!--            </ul>-->
         <!--          </li>-->
         <li class="{% if this.page.id == 'contact' %}active{% endif %}"><a href="{{ 'contact'|page }}">Contact</a></li>
+
+        <li class="{% if this.page.id == 'faq' %}active{% endif %}">
+            <a class="nav-link" href="{{ 'faq'|page }}">FAQ</a>
+        </li>
+        <li class="{% if this.page.id == 'profile' %}active{% endif %}">
+            <a class="nav-link" href="{{ 'profile'|page }}">{% if user %}Profile{% else %}Login | Register{%
+                endif
+                %}</a>
+        </li>
+        {% if user %}
+        <li class="{% if this.page.id == 'my-orders' %}active{% endif %}">
+            <a class="nav-link" href="{{ 'my-orders'|page }}">
+                {% if inGroup('admin') %} Admin Panel
+                {% elseif inGroup('author') %} Author Panel
+                {% else %} My Orders
+                {% endif %}</a>
+        </li>
+        {% endif %}
     </ul>
 </div>
