@@ -24,8 +24,8 @@
                 %}</a>
         </li>
         {% if user %}
-        <li class="{% if this.page.id == 'my-orders' %}active{% endif %}">
-            <a class="nav-link" href="{{ 'my-orders'|page }}">
+        <li class="{% if this.page.id == 'orders-panel' %}active{% endif %}">
+            <a class="nav-link" href="{{ 'orders-panel'|page }}">
                 {% if inGroup('admin') %} Admin Panel
                 {% elseif inGroup('author') %} Author Panel
                 {% else %} My Orders
