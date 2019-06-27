@@ -1,0 +1,90 @@
+{% set commentList = commentList.commentList %}
+
+<hr>
+
+<div class="row">
+    <div class="col-sm-12" id="comment-in-detail-page">
+        <div>
+            <h3 class="reviews d-inline-flex">Leave your comment</h3>
+            <button class="btn btn-default text-uppercase float-right" type="button"
+                    data-request="onLogout" data-request-data="redirect: '/'">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+
+        <div id="add-comment">
+            <form data-request="onCreateComment" class="form-horizontal" id="commentForm" role="form">
+                <div class="form-group">
+                                    <textarea class="form-control" name="text" id="addComment"
+                                              rows="5"></textarea>
+                </div>
+                <!--                <div class="form-group">-->
+                <!--                    <label for="uploadMedia" class="col-sm-2 control-label">Upload media-->
+                <!--                        (Placeholder)</label>-->
+                <!--                    <div class="col-sm-10">-->
+                <!--                        <div class="input-group">-->
+                <!--                            <div class="input-group-addon">http://</div>-->
+                <!--                            <input type="text" class="form-control" name="uploadMedia" id="uploadMedia">-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="form-group">
+                    <div class="col-sm-12 text-right">
+                        <button class="btn btn-outline-success text-uppercase" type="submit"
+                                id="submitComment"><i class="fas fa-paper-plane"></i> Send
+                        </button>
+                    </div>
+                </div>
+
+                {% for error in errors.all() %}
+                <div class="alert alert-danger mt-3">
+                    {{ error }}
+                </div>
+                {% endfor %}
+
+                {% flash success %}
+                <!--                <div class="alert alert-success mt-3">{{ message }}</div>-->
+                {% endflash %}
+            </form>
+        </div>
+
+        {% if commentList[0] %}
+
+        <div class="media-list m-2">
+
+            {% for comment in commentList %}
+
+            <div class="media">
+                <div class="media-body">
+                    <div class="single-comment">
+                        <span class="sub-text">{{ comment.created_at | time_diff}}</span>
+                        <h4 class="comment-customer-name d-inline-flex">{{ comment.sender.name }}</h4>
+
+                        {% if isAdmin(comment.sender_id) %}
+                        <span class="d-inline-flex" tabindex="0" data-toggle="tooltip"
+                              title="Admin"><i
+                                class="fas fa-user-tie"
+                                aria-hidden="true"></i></span>
+                        {% endif %}
+
+                        {% if isAuthor(comment.sender_id) %}
+                        <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                              title="Author"><i
+                                class="fas fa-pencil-alt"
+                                aria-hidden="true"></i></span>
+                        {% endif %}
+
+                        <div>
+                            <p class="media-comment">{{ comment.text }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+
+        {% endif %}
+    </div>
+</div>
