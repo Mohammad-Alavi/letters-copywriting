@@ -1,0 +1,24 @@
+title = "Profile"
+url = "/profile"
+layout = "pages"
+description = "User login and profile page"
+is_hidden = 0
+
+[sociallogin]
+
+[RainLab\User\Components\Account account]
+redirect = "profile"
+paramCode = "code"
+forceSecure = 0
+==
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+<div class="row update-form">
+    <div class="col-12">
+        {% partial 'account::update' %}
+    </div>
+</div>
+{% endif %}
