@@ -1,0 +1,37 @@
+name: 'Greatness Theme'
+description: 'A free multipropouse theme for OctoberCMS'
+author: Devel
+homepage: 'https://devel.com.ar'
+code: ''
+form:
+  fields:
+    site_name:
+      label: 'Site name'
+      comment: 'The website name as it should appear on the front-end'
+      default: 'Greatness.'
+    primary_color:
+      label: 'Primary color'
+      type: colorpicker
+      assetVar: 'primary-color'
+      default: '#F85A16'
+    secondary_color:
+      label: 'Secondary color'
+      type: colorpicker
+      assetVar: 'secondary-color'
+      default: '#118DF0'
+    facebook_link:
+      label: 'Facebook Social Link'
+      comment: 'Your Facebook link'
+      default: 'https://www.facebook.com/page_name'
+    twitter_link:
+      label: 'Twitter Social Link'
+      comment: 'The URL of your Twitter account'
+      default: 'https://twitter.com/user_account'
+    linkedin_link:
+      label: 'LinkedIn Social Link'
+      comment: 'The URL of your LinkedIn account'
+      default: 'https://www.linkedin.com/in/user_account'
+    instagram_link:
+      label: 'Instagram Social Link'
+      comment: 'The URL of your Instagram account'
+      default: 'https://www.instagram.com/user_account'
