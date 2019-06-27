@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'activeTheme' => 'letters-copywriting',
+    'activeTheme' => 'denora-letters-copywriting',
 
     /*
     |--------------------------------------------------------------------------
