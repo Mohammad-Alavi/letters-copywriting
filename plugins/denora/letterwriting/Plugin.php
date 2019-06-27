@@ -32,15 +32,15 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            'rush' => [
-                'label' => 'Rush',
-                'description' => 'Change how rush system works.',
+            'order' => [
+                'label' => 'Order',
+                'description' => 'Settings related to order system.',
                 'category' => 'Letter Writing',
-                'icon' => 'icon-car',
+                'icon' => 'icon-shopping-basket',
                 'class' => 'Denora\Letterwriting\Models\Settings',
                 'order' => 500,
-                'keywords' => 'rush order'
-            ]
+                'keywords' => 'order rush'
+            ],
         ];
     }
 
@@ -48,6 +48,9 @@ class Plugin extends PluginBase
     {
         return [
             'functions' => [
+                'isRushEnabled' => function () {
+                    return Settings::instance()->rush_enabled;
+                },
                 'getRushPercentage' => function () {
                     return Settings::instance()->rush_percentage;
                 },

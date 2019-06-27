@@ -22,6 +22,7 @@
                               rows="5"></textarea>
                 </div>
 
+                {% if isRushEnabled() %}
                 <div class="form-group">
                     <input class="form-check form-check-inline" type="checkbox" name="is_rush">
                     <label class="form-check-label">Rush Job</label>
@@ -31,6 +32,7 @@
                             aria-hidden="true"></i></span>
                     <span>+ {{ getRushPercentage() }}%</span>
                 </div>
+                {% endif %}
 
                 <div class="form-group">
                     <label>Language</label>
