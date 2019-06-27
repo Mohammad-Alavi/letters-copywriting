@@ -17,7 +17,6 @@
 
         <li class="{% if this.page.id == 'faq' %}active{% endif %}">
             <a class="nav-link" href="{{ 'faq'|page }}">FAQ</a>
-        </li>
         <li class="{% if this.page.id == 'profile' %}active{% endif %}">
             <a class="nav-link" href="{{ 'profile'|page }}">{% if user %}Profile{% else %}Login | Register{%
                 endif
@@ -30,6 +29,15 @@
                 {% elseif inGroup('author') %} Author Panel
                 {% else %} My Orders
                 {% endif %}</a>
+        </li>
+        {% endif %}
+        </li>
+        <!--        only show 'new order' btn to customer (not admin or author)-->
+        {% if inGroup('admin') %}
+        {% elseif inGroup('author') %}
+        {% else %}
+        <li class="btn btn-danger text-white {% if this.page.id == 'order' %}active{% endif %}">
+            <a class="nav-link" href="{{ 'new-order'|page }}">New Order</a>
         </li>
         {% endif %}
     </ul>
