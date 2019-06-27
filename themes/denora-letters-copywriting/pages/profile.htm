@@ -16,9 +16,7 @@ forceSecure = 0
 {% partial 'account::login' %}
 
 {% else %}
-<div class="row update-form">
-    <div class="col-12">
-        {% partial 'account::update' %}
-    </div>
-</div>
+
+{% partial 'account::update' %}
+
 {% endif %}
