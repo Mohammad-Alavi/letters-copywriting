@@ -10,14 +10,15 @@ let mix = require('laravel-mix');
  | file for your application, as well as bundling up your JS files.
  |
  */
-mix.setPublicPath('./themes/letters-copywriting/assets/');
+mix.setPublicPath('./themes/denora-letters-copywriting/assets/');
 
-var resourceRoute = './themes/letters-copywriting/sources/';
+var resourceRoute = './themes/denora-letters-copywriting/assets/';
 
 // mix.extract(['jquery', 'popper.js', 'bootstrap-scss']);
 
-mix.js(resourceRoute + 'js/app.js', 'dist/js')
-    .sass(resourceRoute + 'sass/app.scss', 'dist/css')
+mix
+    // .js(resourceRoute + 'js/app.js', 'dist/js')
+    .sass(resourceRoute + 'sass/app.scss', 'css')
     .sourceMaps();
 
 
@@ -28,7 +29,7 @@ mix.browserSync({
     files: [
         resourceRoute + '/dist/css/*.css',
         resourceRoute + 'dist/js/*.js',
-        './themes/letters-copywriting/**/*.htm',
+        './themes/denora-letters-copywriting/**/*.htm',
     ],
     proxy: 'homestead.test',
 });
