@@ -1,0 +1,8 @@
+[resetPassword]
+paramCode = "code"
+==
+{% if resetPassword.code == null %}
+{% partial 'resetpassword/restore' %}
+{% else %}
+{% partial 'resetpassword/reset' %}
+{% endif %}

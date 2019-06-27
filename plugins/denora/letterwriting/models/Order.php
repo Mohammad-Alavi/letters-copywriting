@@ -1,5 +1,6 @@
 <?php namespace Denora\Letterwriting\Models;
 
+use Illuminate\Support\Facades\Mail;
 use Model;
 use RainLab\User\Models\User;
 
@@ -68,6 +69,7 @@ class Order extends Model {
      */
     public function setStatusCreated(int $doerId, string $description = '') {
         $this->setNewStatus($doerId, Status::$CREATED, $description);
+        $this->notifyStatusChanged();
     }
 
     /**
@@ -78,6 +80,7 @@ class Order extends Model {
     public function setStatusPriced(int $doerId, $price, string $description = '') {
         $this->orderRepository->changePrice($this->id, $price);
         $this->setNewStatus($doerId, Status::$PRICED, $description);
+        $this->notifyStatusChanged();
     }
 
     /**
@@ -86,6 +89,7 @@ class Order extends Model {
      */
     public function setStatusPaid(int $doerId, string $description = '') {
         $this->setNewStatus($doerId, Status::$PAID, $description);
+        $this->notifyStatusChanged();
     }
 
     /**
@@ -96,6 +100,7 @@ class Order extends Model {
     public function setStatusAssigned(int $doerId, int $authorId, string $description = '') {
         $this->orderRepository->assignAuthor($this->id, $authorId);
         $this->setNewStatus($doerId, Status::$ASSIGNED, $description);
+        $this->notifyStatusChanged();
     }
 
     /**
@@ -125,6 +130,7 @@ class Order extends Model {
      */
     public function setStatusDelivered(int $doerId, string $description = '') {
         $this->setNewStatus($doerId, Status::$DELIVERED, $description);
+        $this->notifyStatusChanged();
     }
 
     /**
@@ -135,6 +141,17 @@ class Order extends Model {
     private function setNewStatus(int $doerId, string $label, string $description) {
         $this->orderRepository->changeStatus($this->id, $label);
         $this->statusRepository->create($doerId, $this->id, $label, $description);
+    }
+
+    private function notifyStatusChanged() {
+        $vars = ['name' => $this->customer->name, 'status' => $this->status, 'order' => $this];
+
+        Mail::send('denora.letterwriting::mail.message', $vars, function ($message) {
+
+            $message->to($this->customer->email);
+            $message->subject('Order Status Report - Letters Copywriting');
+
+        });
     }
 
 }

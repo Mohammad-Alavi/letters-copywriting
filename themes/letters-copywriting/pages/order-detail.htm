@@ -14,8 +14,11 @@ order_id = "{{ :id }}"
 
 [commentList]
 order_id = "{{ :id }}"
-==
 
+[RainLab\User\Components\Account account]
+paramCode = "code"
+forceSecure = 0
+==
 {% if not user %}
 
 {% partial 'account::login' %}
