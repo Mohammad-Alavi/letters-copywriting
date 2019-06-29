@@ -11,6 +11,7 @@ use Denora\TapCompany\Models\TransactionRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 
 class Pay extends ComponentBase {
 
@@ -35,6 +36,8 @@ class Pay extends ComponentBase {
         $orderId = $this->property('order_id');
         $orderRepository = new OrderRepository();
         $this->order = $orderRepository->find($orderId);
+
+        $this->page['is_paid'] = $this->order->isPaid();
 
         if (!$this->order->isPaid())
             $this->createCharge();
@@ -103,6 +106,9 @@ class Pay extends ComponentBase {
         $this->onDone($response);
     }
 
+    /**
+     * @param Response $response
+     */
     private function onDone(Response $response) {
         $body = $response->getBody()->getContents();
         $body = json_decode($body, true);
@@ -112,7 +118,11 @@ class Pay extends ComponentBase {
 
         $this->transactionRepository->create($this->order->id, $chargeId, $transactionUrl);
 
-        header('Location: ' . $transactionUrl);
+
+//        header('Location: ' . $transactionUrl);
+//        exit();
+
+        $this->page['transaction_url'] = $transactionUrl;
     }
 
 }
