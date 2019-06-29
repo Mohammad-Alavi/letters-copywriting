@@ -51,8 +51,9 @@ class Order extends Model {
      * @var array
      */
     public $hasMany = [
-        'statuses' => 'Denora\Letterwriting\Models\Status',
-        'comments' => 'Denora\Letterwriting\Models\Comment',
+        'statuses'     => 'Denora\Letterwriting\Models\Status',
+        'comments'     => 'Denora\Letterwriting\Models\Comment',
+        'transactions' => 'Denora\TapCompany\Models\Transaction',
     ];
 
     public function getCustomerAttribute() {
@@ -61,6 +62,16 @@ class Order extends Model {
 
     public function getAuthorAttribute() {
         return User::query()->where('id', $this->author_id)->first();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPaid() {
+        foreach ($this->transactions as $transaction){
+            if ($transaction->paid_at != null) return true;
+        }
+        return false;
     }
 
     /**
