@@ -10,6 +10,7 @@ use Denora\TapCompany\Models\Settings;
 use Denora\TapCompany\Models\TransactionRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
+use Illuminate\Support\Facades\Config;
 
 class Pay extends ComponentBase {
 
@@ -70,6 +71,7 @@ class Pay extends ComponentBase {
 //        $tapCompanySecretApiKey = 'sk_test_XKokBfNWv6FIYuTMg5sLPjhJ';
         $tapCompanySecretApiKey = Settings::instance()->secret_api_key;
         $requestUrl = 'https://api.tap.company/v2/charges';
+        $redirectUrl = Config::get('app.url') . '/payment/verify';
         $jsonArray = [
             'amount'   => $this->order->price,
             'currency' => 'KWD',
@@ -85,10 +87,9 @@ class Pay extends ComponentBase {
                 'id' => 'src_kw.knet'
             ],
             'redirect' => [
-                'url' => 'https://homestead.test/payment/verify'
+                'url' => $redirectUrl
             ]
         ];
-
 
         $client = new Client();
         $response = $client->request(
@@ -111,7 +112,7 @@ class Pay extends ComponentBase {
 
         $this->transactionRepository->create($this->order->id, $chargeId, $transactionUrl);
 
-        header('Location: '.$transactionUrl);
+        header('Location: ' . $transactionUrl);
     }
 
 }
