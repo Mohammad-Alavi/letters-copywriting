@@ -24,9 +24,7 @@
                 {% endif %}
 
                 {% if not inGroup('author') %}
-                <li class="list-group-item"><strong>Price: </strong>{% if order.price != null %}${% endif %}{{
-                    order.price }}
-                </li>
+                <li class="list-group-item"><strong>Price: </strong>{% if order.price != null %}${{ order.price }} {% if not order.isPaid() %}<a href="/payment/pay/{{order.id}}"><button type="submit" class="btn btn-primary m-1">PAY</button></a>{% endif %} {% endif %}</li>
                 {% endif %}
 
                 {% if inGroup('author') %}
