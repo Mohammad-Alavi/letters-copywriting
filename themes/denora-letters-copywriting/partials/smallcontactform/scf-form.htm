@@ -1,0 +1,32 @@
+{% if flashError or (flashSuccess == false) or (flashSuccess!=contactForm) or (flashSuccess==contactForm
+and settingsGet('form_hide_after_success', 0) == 0) %}
+
+
+<h3>Get In Touch</h3>
+{{ form_open(contactForm.getFormAttributes) }}
+
+{% for field in contactForm.fields %}
+
+{{ contactForm.getFieldHtmlCode(field)|raw }}
+
+{% endfor %}
+
+{{ contactForm.getAntispamFieldHtmlCode({})|raw }}
+
+{{ contactForm.getDescriptionFieldHtmlCode({})|raw }}
+
+{% if settingsGet('add_google_recaptcha') and settingsGet('google_recaptcha_site_key') %}
+<div class="{{contactForm.getReCaptchaWrapperClass()}}">
+    <div class="g-recaptcha" data-sitekey="{{ settingsGet('google_recaptcha_site_key') }}"></div>
+</div>
+{% endif %}
+
+{{ contactForm.getSubmitButtonHtmlCode({})|raw }}
+
+{{ form_close() }}
+{% if settingsGet('google_recaptcha_scripts_allow') %}
+<script src='https://www.google.com/recaptcha/api.js{{ settingsGet("google_recaptcha_locale_allow") and currentLocale ? ("?hl="~currentLocale) }}'></script>
+{% endif %}
+
+{% endif %}
+

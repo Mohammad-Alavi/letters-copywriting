@@ -1,65 +1,69 @@
 {% set orderList = __SELF__.orderList %}
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-sm-12 animate-box">
 
-<div class="container">
-    <div class="row margin-top-75">
-        <div class="col-12 text-center">
-            <p class="float-left text-left">Type something in the input field to search the table for Category,
-                Description,
-                Status, etc...</p>
-            <input class="form-control" id="myInput" type="text" placeholder="Search..">
-            <br>
-            <table class="table table-striped table-bordered table-hover table-responsive-sm" id="admin_order_table">
-                <thead class="thead-dark">
-                <tr>
-                    <th scope="col">Order ID</th>
-                    <th scope="col">Category</th>
-<!--                    <th scope="col">Description</th>-->
-                    <th scope="col">Status</th>
-                    <th scope="col">Is Rush</th>
-                    <th scope="col">Language</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Creation Date</th>
-                    <th scope="col">Detail</th>
-                </tr>
-                </thead>
-                <tbody id="order-list-tbody">
-                {% for order in orderList %}
-                <tr>
-                    <td data-id='{{order.id}}'>{{ order.id }}</td>
-                    <td>{{ order.category }}</td>
-<!--                    <td>{{ order.description | truncate(25)}} </td>-->
+                <p class="float-left text-left">Type something in the input field to search the table for Category,
+                    Description,
+                    Status, etc...</p>
+                <input class="form-control" id="myInput" type="text" placeholder="Search..">
+                <br>
+                <table class="table table-striped table-bordered table-hover table-responsive-sm"
+                       id="admin_order_table">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Order ID</th>
+                        <th scope="col">Category</th>
+                        <!--                    <th scope="col">Description</th>-->
+                        <th scope="col">Status</th>
+                        <th scope="col">Is Rush</th>
+                        <th scope="col">Language</th>
+                        <th scope="col">Author</th>
+                        <th scope="col">Creation Date</th>
+                        <th scope="col">Detail</th>
+                    </tr>
+                    </thead>
+                    <tbody id="order-list-tbody">
+                    {% for order in orderList %}
+                    <tr>
+                        <td data-id='{{order.id}}'>{{ order.id }}</td>
+                        <td>{{ order.category }}</td>
+                        <!--                    <td>{{ order.description | truncate(25)}} </td>-->
 
-                    <td>
-                        {% if inGroup('author') or inGroup('admin') %}
-                        {{ order.status }}
+                        <td>
+                            {% if inGroup('author') or inGroup('admin') %}
+                            {{ order.status }}
 
-                        {% else %}
+                            {% else %}
 
-                        {% if (order.status == 'assigned') or
-                        (order.status == 'done') or
-                        (order.status == 'rejected') %}
-                        in progress
-                        {% else %}
-                        {{ order.status }}
-                        {% endif %}
+                            {% if (order.status == 'assigned') or
+                            (order.status == 'done') or
+                            (order.status == 'rejected') %}
+                            in progress
+                            {% else %}
+                            {{ order.status }}
+                            {% endif %}
 
-                        {% endif %}
-                    </td>
+                            {% endif %}
+                        </td>
 
-                    <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
-                    <td>{{ order.language }}</td>
-                    <td>{{ order.author.name }}</td>
-                    <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
-                    <td class="text-center">
-                        <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">View
-                            Detail
-                        </button>
-                    </td>
-                </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <!--            <lable id="asdf">asd</lable>-->
+                        <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
+                        <td>{{ order.language }}</td>
+                        <td>{{ order.author.name }}</td>
+                        <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary" onclick="window.location.href = 'order-detail/{{order.id}}';">
+                                View
+                                Detail
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <!--            <lable id="asdf">asd</lable>-->
+            </div>
         </div>
     </div>
 </div>

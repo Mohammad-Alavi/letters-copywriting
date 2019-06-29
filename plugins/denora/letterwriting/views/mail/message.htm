@@ -10,4 +10,4 @@ This message was sent using no formatting (plain text)
 
 <p>Your order status has been set to <strong>{{ order.status }}</strong>.</p>
 <hr>
-<a href="http://www.outland.ir/my-orders/{{ order.id }}">See your order details!</a>
+<a href="{{Config::get('app.url')}}/order-detail/{{ order.id }}">See your order details!</a>

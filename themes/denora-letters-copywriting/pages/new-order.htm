@@ -1,0 +1,32 @@
+title = "Order"
+url = "/new-order"
+layout = "pages"
+description = "New Order page"
+is_hidden = 0
+
+[newOrder]
+
+[RainLab\User\Components\Account account]
+redirect = "new-order"
+paramCode = "code"
+forceSecure = 0
+
+[sociallogin]
+==
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+
+{% if inGroup('admin') or inGroup('author') %}
+<div>You are an admin or an author! you cannot place orders!</div>
+
+<!-- if not admin or author then we assume it is a customer by default -->
+{% else %}
+{% partial 'letterwriting/new_order' %}
+
+{% endif %}
+
+
+{% endif %}
