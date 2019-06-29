@@ -53,7 +53,7 @@
                         <td>{{ order.author.name }}</td>
                         <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
                         <td class="text-center">
-                            <button class="btn btn-primary" onclick="window.location.href = 'my-orders/{{order.id}}';">
+                            <button class="btn btn-primary" onclick="window.location.href = 'order-detail/{{order.id}}';">
                                 View
                                 Detail
                             </button>
