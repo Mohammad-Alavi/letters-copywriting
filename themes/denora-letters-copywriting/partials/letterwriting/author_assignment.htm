@@ -1,20 +1,36 @@
 {% set authorList = authorAssignment.authorList %}
+{% set order = orderDetails.order %}
 
+{% if (order.status == 'created') or
+(order.status == 'priced') or
+(order.status == 'paid') or
+(order.status == 'delivered') %}
+{% else %}
 <hr>
 
-<form data-request="onAssignAuthor">
+<div class="row">
+    <div class="col-xs-12 animate-box">
 
-    <label>
-        Select an author:
-        <select name="author_id" class="form-control custom-select">
-            {% for author in authorList %}
-            <option value="{{ author.id }}">{{ author.name }}</option>
-            {% endfor %}
-        </select>
-    </label>
+        <form data-request="onAssignAuthor">
 
-    <button type="submit" class="btn btn-primary">Assign</button>
-    <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
-          title="This is only viewable by Admins"><i class="fa fa-info-circle"
-                                                     aria-hidden="true"></i></span>
-</form>
+            <label>
+                Select an author:
+                <select name="author_id"
+                        class="form-control custom-select">
+                    {% for author in authorList %}
+                    <option value="{{ author.id }}">{{ author.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <button type="submit" class="btn btn-primary">
+                Assign
+            </button>
+            <span class="d-inline-block" tabindex="0" data-toggle="tooltip"
+                  title="This is only viewable by Admins. - Only enabled when the order progress status is past PAID."><i
+                    class="fa fa-info-circle"
+                    aria-hidden="true"></i></span>
+        </form>
+    </div>
+</div>
+{% endif %}
