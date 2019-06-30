@@ -20,7 +20,7 @@
             <h1>Greatness Awaits!</h1>
             <h2>Online Proofreading and Copy-editing Service</h2>
             <p>
-              <a href="{% if user %} {{ 'orders-panel'|page }} {% else %} {{ 'profile'|page }} {% endif %}" class="btn btn-primary btn-lg">I want to Hire</a>
+              <a href="{% if user %} {{ 'new-order'|page }} {% else %} {{ 'profile'|page }} {% endif %}" class="btn btn-primary btn-lg">I want to Hire</a>
               <a href="{{ 'contact'|page }}" class="btn btn-white btn-outline btn-lg">I want to Work</a></p>
           </div>
         </div>
