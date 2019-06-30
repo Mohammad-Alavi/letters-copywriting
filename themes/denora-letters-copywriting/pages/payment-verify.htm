@@ -1,9 +1,9 @@
 title = "Payment Verify"
-url = "/payment/verify"
-layout = "default"
+url = "/payment/payment-verify"
+layout = "pages"
 is_hidden = 0
 
 [paymentVerify]
 charge_id = "{{ :charge_id }}"
 ==
-{% component 'paymentVerify' %}
+{% partial 'payment/verification' %}

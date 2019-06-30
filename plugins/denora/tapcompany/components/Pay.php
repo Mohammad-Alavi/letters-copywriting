@@ -74,7 +74,7 @@ class Pay extends ComponentBase {
 //        $tapCompanySecretApiKey = 'sk_test_XKokBfNWv6FIYuTMg5sLPjhJ';
         $tapCompanySecretApiKey = Settings::instance()->secret_api_key;
         $requestUrl = 'https://api.tap.company/v2/charges';
-        $redirectUrl = Config::get('app.url') . '/payment/verify';
+        $redirectUrl = Config::get('app.url') . '/payment/payment-verify';
         $jsonArray = [
             'amount'   => $this->order->price,
             'currency' => 'KWD',

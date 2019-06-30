@@ -1,9 +1,9 @@
 title = "Pay"
 url = "/payment/pay/:order_id"
-layout = "default"
+layout = "pages"
 is_hidden = 0
 
 [pay]
 order_id = "{{ :order_id }}"
 ==
-{% component 'pay' %}
+{% partial 'payment/pay' %}
