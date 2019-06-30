@@ -1,5 +1,17 @@
 {% set categoryList = newOrder.categoryList %}
 
+{% if inGroup('admin') or inGroup('author') %}
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 animate-box text-center">
+                <h3 class="border border-info p-3 d-inline-flex">You are an admin or an author!<br>You cannot place order!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- if not admin or author then we assume it is a customer by default -->
+{% else %}
 <div class="gtco-section">
     <div class="gtco-container">
         <div class="row">
@@ -63,3 +75,4 @@
         </div>
     </div>
 </div>
+{% endif %}

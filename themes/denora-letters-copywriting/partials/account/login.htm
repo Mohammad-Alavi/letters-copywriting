@@ -39,12 +39,10 @@
             </div>
             <div class="or align-xy-center col-sm-12">or</div>
             <div class="align-xy-center col-sm-12 animate-box">
-                <!--            <div class="col-md-5 social-login animate-box">-->
                 <!--    social sign in-->
                 {% for name, link in social_login_links %}
-                <a class="btn btn-danger btn-social btn-google" href="{{ link }}"><span class="fab fa-google"></span>
-                    Sign
-                    in with {{ name }}</a>
+                <a class="btn btn-social btn-google" href="{{ link }}">
+                    <span class="fab fa-google"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign in with {{ name }}</a>
                 {% endfor %}
             </div>
         </div>

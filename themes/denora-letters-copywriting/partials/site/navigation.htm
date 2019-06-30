@@ -36,8 +36,8 @@
         {% if inGroup('admin') %}
         {% elseif inGroup('author') %}
         {% else %}
-        <li class="btn btn-danger text-white {% if this.page.id == 'order' %}active{% endif %}">
-            <a class="nav-link" href="{{ 'new-order'|page }}">New Order</a>
+        <li class="btn btn-danger {% if this.page.id == 'order' %}active{% endif %}">
+            <a class="nav-link text-white" href="{{ 'new-order'|page }}">New Order</a>
         </li>
         {% endif %}
     </ul>
