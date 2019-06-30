@@ -19,14 +19,6 @@ forceSecure = 0
 
 {% else %}
 
-{% if inGroup('admin') or inGroup('author') %}
-<div>You are an admin or an author! you cannot place orders!</div>
-
-<!-- if not admin or author then we assume it is a customer by default -->
-{% else %}
 {% partial 'letterwriting/new_order' %}
-
-{% endif %}
-
 
 {% endif %}
