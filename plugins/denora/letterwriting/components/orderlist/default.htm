@@ -18,6 +18,7 @@
                         <!--                    <th scope="col">Description</th>-->
                         <th scope="col">Status</th>
                         <th scope="col">Is Rush</th>
+                        <th scope="col">Price</th>
                         <th scope="col">Language</th>
                         <th scope="col">Author</th>
                         <th scope="col">Creation Date</th>
@@ -49,6 +50,7 @@
                         </td>
 
                         <td>{% if order.is_rush == 1 %} Yes {% else %} No {% endif %}</td>
+                        <td>{% if order.price == null %} Not Priced {% else %} {{ order.price }} {% endif %}</td>
                         <td>{{ order.language }}</td>
                         <td>{{ order.author.name }}</td>
                         <td>{{ order.created_at | localizeddate('medium', 'none', locale)}}</td>
