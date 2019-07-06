@@ -1,0 +1,9 @@
+title = "Pay"
+url = "/payment/pay/:order_id"
+layout = "pages"
+is_hidden = 0
+
+[pay]
+order_id = "{{ :order_id }}"
+==
+{% partial 'payment/pay' %}

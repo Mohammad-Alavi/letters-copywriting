@@ -1,0 +1,15 @@
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 animate-box text-center">
+                {% if status == "CAPTURED" %}
+                <h2>Your payment has been successfully completed</h2>
+                {% else %}
+                <h2>Your payment process has failed. please try again</h2>
+                {% endif %}
+                <a class="btn btn-primary" href="/order-detail/{{order_id}}">Click Here</a>
+                <p>to see your order's detail</p>
+            </div>
+        </div>
+    </div>
+</div>

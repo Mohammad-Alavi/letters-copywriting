@@ -1,0 +1,24 @@
+title = "Order"
+url = "/new-order"
+layout = "pages"
+description = "New Order page"
+is_hidden = 0
+
+[newOrder]
+
+[RainLab\User\Components\Account account]
+redirect = "new-order"
+paramCode = "code"
+forceSecure = 0
+
+[sociallogin]
+==
+{% if not user %}
+
+{% partial 'account::login' %}
+
+{% else %}
+
+{% partial 'letterwriting/new_order' %}
+
+{% endif %}

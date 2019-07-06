@@ -1,0 +1,16 @@
+tabs:
+    fields:
+        rush_enabled:
+            label: Enabled
+            span: auto
+            required: 1
+            type: checkbox
+            comment: 'Enable/Disable availability of rush system for new orders'
+            tab: Rush
+        rush_percentage:
+            label: 'Rush Percentage'
+            span: left
+            default: '0'
+            required: 1
+            type: number
+            tab: Rush

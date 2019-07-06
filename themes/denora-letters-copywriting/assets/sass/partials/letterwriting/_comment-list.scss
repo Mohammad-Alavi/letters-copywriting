@@ -1,0 +1,71 @@
+.reviews {
+  color: #555;
+  font-weight: bold;
+}
+
+.media .media-object {
+  max-width: 120px;
+}
+
+.media-comment {
+  margin-bottom: 20px;
+}
+
+.custom-input-file {
+  overflow: hidden;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: #eee url('https://s3.amazonaws.com/uifaces/faces/twitter/walterstephanie/128.jpg');
+  background-size: 120px;
+  border-radius: 120px;
+}
+
+input[type="file"] {
+  z-index: 999;
+  line-height: 0;
+  font-size: 0;
+  position: absolute;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  -ms-filter: "alpha(opacity=0)";
+  margin: 0;
+  padding: 0;
+  left: 0;
+}
+
+.uploadPhoto {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  display: none;
+  width: 50%;
+  height: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, .3);
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.custom-input-file:hover .uploadPhoto {
+  display: block;
+}
+
+.single-comment {
+  position: relative;
+
+  .sub-text {
+    color: #aaa;
+    font-size: 11px;
+    //position: absolute;
+    //left: -90px;
+    //top: 5px;
+  }
+
+  .comment-customer-name {
+    margin: 0;
+  }
+}

@@ -1,10 +1,38 @@
 {% set order = __SELF__.order %}
 
 <h2>ID: #{{ order.id }}</h2>
-<p>{{ order.description }}</p>
-<p><strong>status: </strong>{{ order.status.label }}</p>
-{% if (order.status.label == 'picked') or (order.status.label == 'rejected') %}
+<p><strong>Description: </strong>{{ order.description }}</p>
+<p><strong>Status: </strong>{{ order.status }}</p>
+<p><strong>Category: </strong>{{ order.category }}</p>
+
+
+{% if (order.status.label == 'assigned') or (order.status.label == 'rejected') %}
+
 <form data-request="{{ __SELF__ }}::onDone">
+
+    <label>
+        Text:
+        <input type="text" name="text">
+    </label>
     <button type="submit">Done</button>
+
 </form>
+
+{% endif %}
+
+<h2>Price assignment</h2>
+
+{% if (order.price == null) %}
+
+<form data-request="{{ __SELF__ }}::onPriced">
+
+    <label>
+        Price:
+        <input type="number" name="price">
+    </label>
+
+    <button type="submit">Price it</button>
+
+</form>
+
 {% endif %}

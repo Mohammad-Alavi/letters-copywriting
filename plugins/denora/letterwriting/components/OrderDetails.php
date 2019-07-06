@@ -2,11 +2,13 @@
 
 namespace Denora\Letterwriting\Components;
 
+use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
 use Denora\Letterwriting\Models\Order;
 use Denora\Letterwriting\Models\OrderRepository;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use PhpParser\Node\Scalar\String_;
+use RainLab\User\Facades\Auth;
 
 class OrderDetails extends ComponentBase {
 
@@ -16,14 +18,22 @@ class OrderDetails extends ComponentBase {
     public $order;
 
     /**
-     * @var String
-     */
-    public $role;
-
-    /**
      * @var OrderRepository
      */
     private $repository;
+
+    /**
+     * Component constructor. Takes in the page or layout code section object
+     * and properties set by the page or layout.
+     *
+     * @param null|CodeBase $cmsObject
+     * @param array         $properties
+     */
+    public function __construct(CodeBase $cmsObject = null, $properties = []) {
+        parent::__construct($cmsObject, $properties);
+
+        $this->repository = new OrderRepository();
+    }
 
     /**
      * Returns information about this component, including name and description.
@@ -41,13 +51,13 @@ class OrderDetails extends ComponentBase {
      */
     public function defineProperties() {
         return [
-            'role'     => [
-                'title'       => 'Role',
+            'role' => [
+                'title'       => 'User Role',
                 'description' => 'Component items change according to user\'s role',
                 'type'        => 'dropdown',
                 'default'     => 'customer',
             ],
-            'order_id' => [
+            'order_id'  => [
                 'title'             => 'Order ID',
                 'description'       => 'ID of the order',
                 'default'           => 0,
@@ -73,13 +83,17 @@ class OrderDetails extends ComponentBase {
     public function init() {
         parent::init();
 
-        $this->repository = new OrderRepository();
-
-        $this->role = $this->property('role');
-
         $orderId = $this->property('order_id');
-        $this->order = $this->repository->find($orderId);
+        $this->order = $this->getOrder($orderId);
+    }
 
+    /**
+     * @param int $orderId
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|null
+     */
+    public function getOrder(int $orderId) {
+        return $this->repository->find($orderId);
     }
 
     /**
@@ -87,9 +101,11 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onDone(){
+    public function onDone() {
         //  TODO: Check if the user is an author
-        $this->order->setStatusDone();
+        $text = Input::get('text');
+        $this->order->setStatusDone(Auth::user()->id, $text);
+
         return Redirect::back();
     }
 
@@ -98,9 +114,10 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onDeliver(){
+    public function onDeliver() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusDelivered();
+        $this->order->setStatusDelivered(Auth::user()->id);
+
         return Redirect::back();
     }
 
@@ -109,9 +126,23 @@ class OrderDetails extends ComponentBase {
      *
      * @return mixed
      */
-    public function onReject(){
+    public function onReject() {
         //  TODO: Check if the user is an admin
-        $this->order->setStatusRejected();
+        $this->order->setStatusRejected(Auth::user()->id);
+
+        return Redirect::back();
+    }
+
+    /**
+     * REMEMBER: This must be shown only to admins
+     *
+     * @return mixed
+     */
+    public function onPriced() {
+        //  TODO: Check if the user is an admin
+        $price = Input::get('price');
+        $this->order->setStatusPriced(Auth::user()->id, $price);
+
         return Redirect::back();
     }
 

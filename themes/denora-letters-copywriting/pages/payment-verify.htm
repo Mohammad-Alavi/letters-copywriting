@@ -1,0 +1,9 @@
+title = "Payment Verify"
+url = "/payment/payment-verify"
+layout = "pages"
+is_hidden = 0
+
+[paymentVerify]
+charge_id = "{{ :charge_id }}"
+==
+{% partial 'payment/verification' %}

@@ -1,0 +1,93 @@
+[session]
+security = "all"
+==
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ this.theme.site_name }} - {{ this.page.title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="{{ this.page.meta_title }}"/>
+    <meta name="description" content="{{ this.page.meta_description }}"/>
+    <meta name="keywords"
+          content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive"/>
+    <meta name="author" content="Devel.com.ar"/>
+    <meta name="generator" content="October CMS">
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content=""/>
+    <meta property="og:image" content=""/>
+    <meta property="og:url" content=""/>
+    <meta property="og:site_name" content=""/>
+    <meta property="og:description" content=""/>
+    <meta name="twitter:title" content=""/>
+    <meta name="twitter:image" content=""/>
+    <meta name="twitter:url" content=""/>
+    <meta name="twitter:card" content=""/>
+
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,600,400italic,700' rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+          integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ [
+		'assets/css/animate.css',
+		'assets/css/icomoon.css',
+		'assets/css/bootstrap.css',
+		'assets/css/magnific-popup.css',
+		'assets/css/owl.carousel.min.css',
+		'assets/css/owl.theme.default.min.css',
+		'assets/css/app.css',
+	 	'assets/css/theme.less'
+		]|theme }}">
+
+
+    <!-- Modernizr JS -->
+    <script src="{{ 'assets/js/modernizr-2.6.2.min.js'|theme }}"></script>
+    <!-- FOR IE9 below -->
+    <!--[if lt IE 9]>
+    <script src="{{ 'assets/js/respond.min.js'|theme }}"></script>
+    <![endif]-->
+    {% styles %}
+
+</head>
+<body>
+
+<div class="gtco-loader"></div>
+
+<div id="page">
+
+    {% partial 'site/header_pages' %}
+
+    {% page %}
+
+    {% partial 'site/suscribe' %}
+
+    {% partial 'site/footer' %}
+
+</div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+</div>
+
+<!-- jQuery -->
+<script src="{{ [
+		'assets/js/jquery.min.js',
+		'assets/js/jquery.easing.1.3.js',
+		'assets/js/bootstrap.bundle.min.js',
+		'assets/js/jquery.waypoints.min.js',
+		'assets/js/owl.carousel.min.js',
+		'assets/js/jquery.countTo.js',
+		'assets/js/jquery.magnific-popup.min.js',
+		'assets/js/magnific-popup-options.js',
+		'assets/js/main.js'
+		]|theme }}"></script>
+
+{% framework extras %}
+{% scripts %}
+
+</body>
+</html>

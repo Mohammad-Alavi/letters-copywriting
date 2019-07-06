@@ -1,0 +1,61 @@
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-push-3 animate-box">
+                <!--    <div class="col-sm-5 col-lg-3 offset-lg-2">-->
+                <p><strong>Already a member? Then login!</strong></p>
+
+                <form id="signupForm"
+                      data-request-validate
+                      data-request-flash
+                      data-request="onSignin">
+                    <div class="form-group">
+                        <label for="userSigninLogin">{{ loginAttributeLabel }}</label>
+                        <input
+                                name="login"
+                                type="text"
+                                class="form-control"
+                                id="userSigninLogin"
+                                placeholder="Enter your {{ loginAttributeLabel|lower }}"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="userSigninPassword">Password</label>
+                        <input
+                                name="password"
+                                type="password"
+                                class="form-control"
+                                id="userSigninPassword"
+                                placeholder="Enter your password"/>
+                    </div>
+
+                    <button data-attach-loading type="submit" class="btn btn-primary" id="submitButton">Sign in</button>
+                    <a class="float-right" href="{{ 'forgot-password' }}">Forgot password?</a>
+
+                    <div class="alert alert-danger login-update-error" data-validate-error>
+                        <div data-message></div>
+                    </div>
+                </form>
+            </div>
+            <div class="or align-xy-center col-sm-12">or</div>
+            <div class="align-xy-center col-sm-12 animate-box">
+                <!--    social sign in-->
+                {% for name, link in social_login_links %}
+                <a class="btn btn-social btn-google" href="{{ link }}">
+                    <span class="fab fa-google"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sign in with {{ name }}</a>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-12 text-center register">
+                <p>
+                    Don't have an account yet?
+                </p>
+                <div><a href="register" class="btn btn-info">Join Now</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+

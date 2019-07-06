@@ -4,18 +4,21 @@ namespace Denora\Letterwriting\Components;
 
 use Cms\Classes\CodeBase;
 use Cms\Classes\ComponentBase;
+use Denora\Letterwriting\Models\Category;
 use Denora\Letterwriting\Models\OrderRepository;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use October\Rain\Support\Facades\Flash;
+use RainLab\User\Facades\Auth;
 
 class NewOrder extends ComponentBase {
 
     /**
-     * @var int
+     * @var Category[]
      */
-    public $userId;
+    public $categoryList;
+
     /**
      * @var OrderRepository
      */
@@ -38,44 +41,36 @@ class NewOrder extends ComponentBase {
         ];
     }
 
-    /**
-     * Defines the properties used by this class.
-     * This method should be used as an override in the extended class.
-     */
-    public function defineProperties() {
-        return [
-            'user_id' => [
-                'title'             => 'User ID',
-                'description'       => 'ID of the user (Admin, Writer, Customer, ...)',
-                'default'           => 0,
-                'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Enter a valid number'
-            ]
-        ];
-    }
-
-    public function onRun() {
-        $this->userId = $this->property('user_id');
+    public function init() {
+        $this->categoryList = Category::all();
     }
 
     public function onCreateOrder() {
+
+        $userId = Auth::user()->id;
+
         if ($this->getValidator()->fails()) {
             return Redirect::back()->withErrors($this->getValidator());
         }
 
         $description = Input::get('description');
         $language = Input::get('language');
+        $category = Input::get('category');
         $isRush = Input::get('is_rush', 0);
 
+        $price = Category::query()->where('label', '=', $category)->first()->price;
+
         $this->repository->create(
-            123,
+            $userId,
             $description,
             $language,
-            0.0,
+            $category,
+            $price,
             $isRush
         );
 
         Flash::success('New order has been created successfully');
+
         return Redirect::back();
     }
 

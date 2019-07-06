@@ -1,0 +1,15 @@
+<div class="gtco-section">
+    <div class="gtco-container">
+        <div class="row">
+            <div class="col-md-12 animate-box text-center">
+                {% if is_paid %}
+                <h2>This order has been paid before</h2>
+                {% else %}
+                <h2>Transaction is ready</h2>
+                <a class="btn btn-primary" href="{{transaction_url}}">Click Here</a>
+                <p>to redirect to payment page.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
